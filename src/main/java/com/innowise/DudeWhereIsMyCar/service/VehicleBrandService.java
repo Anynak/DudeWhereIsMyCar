@@ -5,9 +5,9 @@ import com.innowise.DudeWhereIsMyCar.entity.VehicleBrand;
 import java.util.List;
 
 public interface VehicleBrandService {
-    public List<VehicleBrand> getAllBrands();
+    List<VehicleBrand> getAllVehicleBrands();
 
-    public VehicleBrand addBrand(VehicleBrand carBrand);
+    VehicleBrand addVehicleBrand(VehicleBrand vehicleBrand);
 
-    public void removeBrand(VehicleBrand carBrand);
+    void removeVehicleBrandById(Long vehicleBrandId);
 }
