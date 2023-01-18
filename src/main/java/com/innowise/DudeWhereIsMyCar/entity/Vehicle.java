@@ -2,10 +2,12 @@ package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 @Data
+@EqualsAndHashCode
 @Entity
 @Table(name = "vehicle", schema = "dude_where_is_my_car")
 @NoArgsConstructor
@@ -28,7 +30,7 @@ public class Vehicle {
     private VehicleType vehicleType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Brand brand;
+    private CarBrand carBrand;
 
     @Column(name = "is_deleted", nullable = false)
     @ColumnDefault("false")

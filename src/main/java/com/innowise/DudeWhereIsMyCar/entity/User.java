@@ -2,10 +2,12 @@ package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 @Data
+@EqualsAndHashCode
 @Entity
 @Table(name = "users", schema = "dude_where_is_my_car")
 @NoArgsConstructor

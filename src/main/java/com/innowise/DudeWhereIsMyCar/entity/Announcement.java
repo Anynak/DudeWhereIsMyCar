@@ -2,10 +2,12 @@ package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 @Data
+@EqualsAndHashCode
 @NoArgsConstructor
 @Entity
 @Table(name = "announcement", schema = "dude_where_is_my_car")
@@ -31,4 +33,6 @@ public class Announcement {
     @Column(name = "is_deleted", nullable = false)
     @ColumnDefault("false")
     private Boolean isDeleted;
+
+
 }

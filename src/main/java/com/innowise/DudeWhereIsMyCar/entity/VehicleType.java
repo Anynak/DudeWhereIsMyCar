@@ -2,9 +2,11 @@ package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode
 @NoArgsConstructor
 @Entity
 @Table(name = "vehicle_type", schema = "dude_where_is_my_car")
