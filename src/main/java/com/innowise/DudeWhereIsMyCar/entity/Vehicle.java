@@ -25,10 +25,12 @@ public class Vehicle {
     private String color;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false)
     private VehicleType vehicleType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Brand brand;
+    @JoinColumn(nullable = false)
+    private VehicleModel vehicleModel;
 
     @Column(name = "is_deleted", nullable = false)
     @ColumnDefault("false")

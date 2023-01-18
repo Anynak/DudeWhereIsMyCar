@@ -14,6 +14,6 @@ public class VehicleType {
     @Column(name = "vehicle_type_id", nullable = false)
     private Long vehicleTypeId;
 
-    @Column(name = "type_name", nullable = false)
+    @Column(name = "type_name", nullable = false, unique = true)
     private String typeName;
 }
