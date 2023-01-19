@@ -32,9 +32,9 @@ public class VehicleBrandController {
         );
     }
 
-    @DeleteMapping("/deleteVehicleBrand/{vehicleId}")
-    public ResponseEntity<?> removeVehicleBrand(@PathVariable Long vehicleId) {
-        vehicleBrandService.removeVehicleBrandById(vehicleId);
+    @DeleteMapping("/deleteVehicleBrand/{brandId}")
+    public ResponseEntity<?> removeVehicleBrand(@PathVariable Long brandId) {
+        vehicleBrandService.removeVehicleBrandById(brandId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -42,7 +42,7 @@ public class VehicleBrandController {
     public ResponseEntity<List<VehicleBrandResponse>> getVehicleBrands() {
         return new ResponseEntity<>(
                 vehicleBrandMapper.toVehicleBrandsResponse(vehicleBrandService.getAllVehicleBrands()),
-                HttpStatus.CREATED
+                HttpStatus.OK
         );
     }
 }

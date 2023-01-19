@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface VehicleModelMapper {
 
+
     List<VehicleModel> toVehicleModels(List<VehicleModelRequest> vehicleBrandsRequest);
 
     List<VehicleModelResponse> toVehicleModelResponses(List<VehicleModel> vehicleModels);

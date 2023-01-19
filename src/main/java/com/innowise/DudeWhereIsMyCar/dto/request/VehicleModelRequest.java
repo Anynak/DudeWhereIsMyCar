@@ -1,9 +1,9 @@
 package com.innowise.DudeWhereIsMyCar.dto.request;
-
-import com.innowise.DudeWhereIsMyCar.entity.VehicleBrand;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class VehicleModelRequest {
 
     private Long vehicleModelId;
@@ -12,7 +12,6 @@ public class VehicleModelRequest {
     @NotNull
     private String vehicleModelName;
 
-    @NotBlank
     @NotNull
-    private VehicleBrand vehicleBrand;
+    private VehicleBrandRequest vehicleBrand;
 }

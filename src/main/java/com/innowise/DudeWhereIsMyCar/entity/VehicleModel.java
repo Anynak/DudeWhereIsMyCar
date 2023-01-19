@@ -3,7 +3,7 @@ package com.innowise.DudeWhereIsMyCar.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+//todo Make Composite Key
 @Data
 @NoArgsConstructor
 @Entity

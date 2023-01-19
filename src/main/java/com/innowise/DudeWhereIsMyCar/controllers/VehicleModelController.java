@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,16 +24,27 @@ import java.util.List;
 public class VehicleModelController {
 
     private final VehicleModelMapper vehicleModelMapper;
-
     private final VehicleModelService vehicleModelService;
 
     @PostMapping("/setVehicleModels")
     public ResponseEntity<List<VehicleModelResponse>> addVehicleModels(@RequestBody @Valid List<VehicleModelRequest> vehicleModelsRequest) {
-        List<VehicleModel> savedVehicleModels = vehicleModelService.addVehicleModels(vehicleModelMapper.toVehicleModels(vehicleModelsRequest));
+        List<VehicleModel> vm = vehicleModelMapper.toVehicleModels(vehicleModelsRequest);
+        List<VehicleModel> savedVehicleModels = vehicleModelService.addVehicleModels(vm);
         return new ResponseEntity<>(
                 vehicleModelMapper.toVehicleModelResponses(savedVehicleModels),
                 HttpStatus.CREATED
         );
+    }
+
+    @DeleteMapping("/deleteVehicleModel/{modelId}")
+    public ResponseEntity<?> removeVehicleModel(@PathVariable Long modelId) {
+        vehicleModelService.removeVehicleModelById(modelId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/getVehicleModels")
+    public ResponseEntity<List<VehicleModelResponse>> getVehicleModels() {
+        return new ResponseEntity<>(vehicleModelMapper.toVehicleModelResponses(vehicleModelService.getAllVehicleModels()), HttpStatus.OK);
     }
 
 

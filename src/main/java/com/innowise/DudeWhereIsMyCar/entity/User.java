@@ -13,7 +13,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "users", schema = "dude_where_is_my_car")
-@NoArgsConstructor
 public class User {
 
     @Id
