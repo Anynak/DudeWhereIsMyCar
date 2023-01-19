@@ -1,13 +1,16 @@
 package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 
-@Data
-@EqualsAndHashCode
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "announcement", schema = "dude_where_is_my_car")
@@ -34,5 +37,16 @@ public class Announcement {
     @ColumnDefault("false")
     private Boolean isDeleted;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Announcement that = (Announcement) o;
+        return announcementId != null && Objects.equals(announcementId, that.announcementId);
+    }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

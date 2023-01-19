@@ -18,12 +18,13 @@ public class VehicleBrandServiceImpl implements VehicleBrandService {
     }
 
     @Override
-    public VehicleBrand addVehicleBrand(VehicleBrand vehicleBrand) {
-        return vehicleBrandRepository.save(vehicleBrand);
+    public List<VehicleBrand> addAllVehicleBrands(List<VehicleBrand> vehicleBrands) {
+        return vehicleBrandRepository.saveAll(vehicleBrands);
     }
 
     @Override
     public void removeVehicleBrandById(Long vehicleBrandId) {
         vehicleBrandRepository.deleteById(vehicleBrandId);
     }
+
 }

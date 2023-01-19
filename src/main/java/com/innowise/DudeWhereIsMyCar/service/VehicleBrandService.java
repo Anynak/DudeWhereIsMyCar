@@ -7,7 +7,8 @@ import java.util.List;
 public interface VehicleBrandService {
     List<VehicleBrand> getAllVehicleBrands();
 
-    VehicleBrand addVehicleBrand(VehicleBrand vehicleBrand);
+    List<VehicleBrand> addAllVehicleBrands(List<VehicleBrand> vehicleBrands);
 
     void removeVehicleBrandById(Long vehicleBrandId);
+
 }

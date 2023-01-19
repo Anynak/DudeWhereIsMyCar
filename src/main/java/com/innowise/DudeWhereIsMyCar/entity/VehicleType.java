@@ -1,12 +1,15 @@
 package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-@Data
-@EqualsAndHashCode
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "vehicle_type", schema = "dude_where_is_my_car")
@@ -18,4 +21,17 @@ public class VehicleType {
 
     @Column(name = "type_name", nullable = false, unique = true)
     private String typeName;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        VehicleType that = (VehicleType) o;
+        return vehicleTypeId != null && Objects.equals(vehicleTypeId, that.vehicleTypeId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

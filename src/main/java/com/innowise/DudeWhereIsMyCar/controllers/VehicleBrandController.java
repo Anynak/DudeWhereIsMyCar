@@ -23,17 +23,17 @@ public class VehicleBrandController {
     private final VehicleBrandService vehicleBrandService;
     private final VehicleBrandMapper vehicleBrandMapper;
 
-    @PostMapping("/addVehicleBrand")
-    public ResponseEntity<VehicleBrandResponse> addVehicleBrand(@RequestBody @Valid VehicleBrandRequest vehicleBrandRequest) {
-        VehicleBrand savedVehicleBrand = vehicleBrandService.addVehicleBrand(vehicleBrandMapper.toVehicleBrand(vehicleBrandRequest));
+    @PostMapping("/setVehicleBrands")
+    public ResponseEntity<List<VehicleBrandResponse>> addVehicleBrands(@RequestBody @Valid List<VehicleBrandRequest> vehicleBrandsRequest) {
+        List<VehicleBrand> savedVehicleBrands = vehicleBrandService.addAllVehicleBrands(vehicleBrandMapper.toVehicleBrands(vehicleBrandsRequest));
         return new ResponseEntity<>(
-                vehicleBrandMapper.toVehicleBrandResponse(savedVehicleBrand),
+                vehicleBrandMapper.toVehicleBrandsResponse(savedVehicleBrands),
                 HttpStatus.CREATED
         );
     }
 
     @DeleteMapping("/deleteVehicleBrand/{vehicleId}")
-    public ResponseEntity<?> removeVehicleBrand(@PathVariable Long vehicleId){
+    public ResponseEntity<?> removeVehicleBrand(@PathVariable Long vehicleId) {
         vehicleBrandService.removeVehicleBrandById(vehicleId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
