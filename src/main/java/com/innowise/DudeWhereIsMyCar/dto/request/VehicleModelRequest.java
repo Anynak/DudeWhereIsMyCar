@@ -14,4 +14,5 @@ public class VehicleModelRequest {
 
     @NotNull
     private VehicleBrandRequest vehicleBrand;
+
 }

@@ -1,11 +1,13 @@
 package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 //todo Make Composite Key
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "vehicle_model", schema = "dude_where_is_my_car")
 public class VehicleModel {

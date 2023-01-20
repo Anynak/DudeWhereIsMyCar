@@ -12,7 +12,7 @@ import java.util.List;
 public interface VehicleBrandMapper {
     VehicleBrand toVehicleBrand(VehicleBrandRequest vehicleBrandRequest);
 
-    List<VehicleBrand> toVehicleBrands(List<VehicleBrandRequest> vehicleBrandsRequest);
+    List<VehicleBrand> toVehicleBrands(Iterable<VehicleBrandRequest> vehicleBrandsRequest);
 
     VehicleBrandResponse toVehicleBrandResponse(VehicleBrand vehicleBrand);
 

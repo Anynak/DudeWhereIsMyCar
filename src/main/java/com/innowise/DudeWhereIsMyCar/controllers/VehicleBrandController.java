@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,7 +25,7 @@ public class VehicleBrandController {
     private final VehicleBrandMapper vehicleBrandMapper;
 
     @PostMapping("/setVehicleBrands")
-    public ResponseEntity<List<VehicleBrandResponse>> addVehicleBrands(@RequestBody @Valid List<VehicleBrandRequest> vehicleBrandsRequest) {
+    public ResponseEntity<List<VehicleBrandResponse>> addVehicleBrands(@RequestBody @Valid Set<VehicleBrandRequest> vehicleBrandsRequest) {
         List<VehicleBrand> savedVehicleBrands = vehicleBrandService.addAllVehicleBrands(vehicleBrandMapper.toVehicleBrands(vehicleBrandsRequest));
         return new ResponseEntity<>(
                 vehicleBrandMapper.toVehicleBrandsResponse(savedVehicleBrands),
