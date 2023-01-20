@@ -10,7 +10,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "vehicle_brand", schema = "dude_where_is_my_car")
 public class VehicleBrand {
