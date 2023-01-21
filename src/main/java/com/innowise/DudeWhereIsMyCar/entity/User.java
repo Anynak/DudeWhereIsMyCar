@@ -3,7 +3,6 @@ package com.innowise.DudeWhereIsMyCar.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +50,7 @@ public class User {
     private String city;
 
     @Column(name = "is_deleted", nullable = false)
-    @ColumnDefault("false")
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 
     @Override
     public boolean equals(Object o) {

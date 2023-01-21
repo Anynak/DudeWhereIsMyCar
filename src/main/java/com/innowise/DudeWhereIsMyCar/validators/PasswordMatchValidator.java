@@ -1,17 +1,17 @@
 package com.innowise.DudeWhereIsMyCar.validators;
 
-import com.innowise.DudeWhereIsMyCar.dto.request.UserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.request.RegisterUserRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class PasswordMatchValidator implements ConstraintValidator<PasswordMatch, UserRequest> {
+public class PasswordMatchValidator implements ConstraintValidator<PasswordMatch, RegisterUserRequest> {
     @Override
     public void initialize(PasswordMatch constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
-    public boolean isValid(UserRequest userRequest, ConstraintValidatorContext context) {
+    public boolean isValid(RegisterUserRequest userRequest, ConstraintValidatorContext context) {
         if (userRequest.getPassword() == null || userRequest.getPassword().isBlank()) {
             return false;
         }

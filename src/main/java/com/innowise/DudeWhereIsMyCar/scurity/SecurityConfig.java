@@ -14,9 +14,14 @@ public class SecurityConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/register", "/logout", "/login").permitAll()
+                .requestMatchers("/api/setVehicleBrands", "/api/deleteVehicleBrand", "/api/setVehicleModels", "/api/deleteVehicleModel").hasRole("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .logout().logoutSuccessUrl("/")
+                .and()
+                .httpBasic()
+        ;
         return httpSecurity.build();
     }
 }

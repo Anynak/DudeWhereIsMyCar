@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @PasswordMatch
-public class UserRequest {
+public class RegisterUserRequest {
 
     @NotNull
     @NotBlank
