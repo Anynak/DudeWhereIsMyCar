@@ -9,19 +9,26 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().disable()
+                .csrf().disable().cors().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/register", "/logout", "/login").permitAll()
-                .requestMatchers("/api/setVehicleBrands", "/api/deleteVehicleBrand", "/api/setVehicleModels", "/api/deleteVehicleModel").hasRole("ROLE_ADMIN")
-                .anyRequest().authenticated()
+                .requestMatchers(
+                        "/api/setVehicleBrands"
+                        , "/api/deleteVehicleBrand"
+                        , "/api/setVehicleModels"
+                        , "/api/deleteVehicleModel"
+                        //, "/api/user/**"
+                ).hasRole("ROLE_ADMIN")
+                .anyRequest().authenticated().and()
+                .formLogin()
                 .and()
                 .logout().logoutSuccessUrl("/")
                 .and()
-                .httpBasic()
-        ;
+                .httpBasic();
         return httpSecurity.build();
     }
 }

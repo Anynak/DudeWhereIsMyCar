@@ -1,6 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
 import com.innowise.DudeWhereIsMyCar.Mappers.UserMapper;
+import com.innowise.DudeWhereIsMyCar.dto.request.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.request.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.entity.Role;
 import com.innowise.DudeWhereIsMyCar.entity.User;
@@ -9,11 +10,14 @@ import com.innowise.DudeWhereIsMyCar.exceptions.PhoneNumberAlreadyExistsExceptio
 import com.innowise.DudeWhereIsMyCar.exceptions.UserAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +30,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserBuLogin(String login) {
+        System.out.println(login);
         return userRepository.findUserByLogin(login).orElseThrow(() -> new UsernameNotFoundException("user " + login + " not found"));
     }
+
+    @Override
+    public List<User> getUsers(PageCriteria pageCriteria) {
+        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize());
+        return userRepository.findAll(pageable).stream().toList();
+    }
+
 
     @Override
     public User registerUser(RegisterUserRequest userRequest) {
@@ -56,4 +68,5 @@ public class UserServiceImpl implements UserService {
         if (phoneExists)
             throw new PhoneNumberAlreadyExistsException("phone number " + userReq.getPhone() + " already exists");
     }
+
 }

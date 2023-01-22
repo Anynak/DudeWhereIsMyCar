@@ -58,7 +58,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.isDeleted;
+        return !this.isDeleted;
     }
 
     private Collection<GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {

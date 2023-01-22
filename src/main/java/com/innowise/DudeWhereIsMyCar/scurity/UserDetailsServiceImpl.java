@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.scurity;
 
 import com.innowise.DudeWhereIsMyCar.entity.User;
-import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
+import com.innowise.DudeWhereIsMyCar.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByLogin(username).orElseThrow(() -> new UsernameNotFoundException("user " + username + " not found"));
+        User user = userService.findUserBuLogin(username);
         return new UserDetailsImpl(user);
     }
 }
