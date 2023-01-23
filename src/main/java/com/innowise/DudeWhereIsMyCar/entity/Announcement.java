@@ -1,7 +1,10 @@
 package com.innowise.DudeWhereIsMyCar.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -20,7 +23,7 @@ public class Announcement {
     @Column(name = "announcement_id", nullable = false)
     private Long announcementId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Vehicle vehicle;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -34,7 +37,7 @@ public class Announcement {
 
     @Column(name = "is_deleted", nullable = false)
     @ColumnDefault("false")
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 
     @Override
     public boolean equals(Object o) {

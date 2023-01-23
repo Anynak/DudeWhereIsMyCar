@@ -22,7 +22,7 @@ public class SecurityConfig {
                         , "/api/setVehicleModels"
                         , "/api/deleteVehicleModel"
                         //, "/api/user/**"
-                ).hasRole("ROLE_ADMIN")
+                ).hasAuthority("ADMIN")
                 .anyRequest().authenticated().and()
                 .formLogin()
                 .and()

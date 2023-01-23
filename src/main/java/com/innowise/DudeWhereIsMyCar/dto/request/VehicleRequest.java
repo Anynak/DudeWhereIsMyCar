@@ -1,16 +1,29 @@
 package com.innowise.DudeWhereIsMyCar.dto.request;
 
-import com.innowise.DudeWhereIsMyCar.entity.VehicleModel;
-import com.innowise.DudeWhereIsMyCar.entity.VehicleType;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class VehicleRequest {
     private Long vehicleId;
-    private Integer mileage;
+
+    @Min(value = 0)
+    private Integer mileage = 0;
+
+    @NotNull
+    @Min(1886)
     private Integer releaseYear;
+
+    @NotNull
+    @NotBlank
     private String color;
-    private VehicleType vehicleType;
-    private VehicleModel vehicleModel;
+
+    @NotNull
+    private VehicleTypeRequest vehicleType;
+
+    @NotNull
+    private VehicleModelRequest vehicleModel;
 
 }

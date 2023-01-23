@@ -8,3 +8,6 @@ public class VehicleTypeRequest {
 
     private String typeName;
 }
+
+
+

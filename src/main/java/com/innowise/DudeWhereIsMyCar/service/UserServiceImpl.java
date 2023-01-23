@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserBuLogin(String login) {
-        System.out.println(login);
         return userRepository.findUserByLogin(login).orElseThrow(() -> new UsernameNotFoundException("user " + login + " not found"));
     }
 

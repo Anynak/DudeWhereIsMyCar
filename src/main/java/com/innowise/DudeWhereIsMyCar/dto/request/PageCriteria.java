@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 public class PageCriteria {
     @Min(value = 1)
-    private int pageNumber;
+    private int pageNumber = 1;
 
     @Min(value = 1)
-    private int pageSize;
+    private int pageSize = 10;
 
 }
