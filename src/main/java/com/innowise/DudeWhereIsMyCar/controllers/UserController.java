@@ -5,6 +5,7 @@ import com.innowise.DudeWhereIsMyCar.dto.request.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.request.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.dto.request.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.response.UserResponse;
+import com.innowise.DudeWhereIsMyCar.dto.response.UserResponseFull;
 import com.innowise.DudeWhereIsMyCar.entity.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepository;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -31,7 +31,7 @@ public class UserController {
     private final UserSearchRepository userSearchRepository;
 
     @GetMapping("/get")
-    public ResponseEntity<?> getUsers(@Valid PageCriteria pageCriteria) {
+    public ResponseEntity<List<UserResponse>> getUsers(@Valid PageCriteria pageCriteria) {
         List<User> users = userService.getUsers(pageCriteria);
         List<UserResponse> userResponses = userMapper.toUserResponse(users);
         return new ResponseEntity<>(userResponses, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<?> findUsers(
+    public ResponseEntity<List<UserResponseFull>> findUsers(
             @Valid SearchUserRequest searchUserRequest,
             @Valid PageCriteria pageCriteria,
             @Valid SortingCriteria sortingCriteria) {

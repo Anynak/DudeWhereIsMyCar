@@ -15,15 +15,18 @@ public class SecurityConfig {
         httpSecurity
                 .csrf().disable().cors().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/register", "/logout", "/login").permitAll()
+                .requestMatchers(
+                         "//swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs.yaml").permitAll()
                 .requestMatchers(
                         "/api/setVehicleBrands"
                         , "/api/deleteVehicleBrand"
                         , "/api/setVehicleModels"
                         , "/api/deleteVehicleModel"
+                        , "/api/user/*"
                         //, "/api/user/**"
                 ).hasAuthority("ADMIN")
-                .anyRequest().authenticated().and()
+                //.anyRequest().authenticated()
+                .and()
                 .formLogin()
                 .and()
                 .logout().logoutSuccessUrl("/")
