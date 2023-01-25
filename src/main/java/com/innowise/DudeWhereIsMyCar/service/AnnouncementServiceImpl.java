@@ -1,15 +1,22 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
+import com.innowise.DudeWhereIsMyCar.dto.request.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.request.SearchAnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.dto.request.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.entity.Announcement;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementRepository;
+import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementSearchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AnnouncementServiceImpl implements AnnouncementService {
     private final AnnouncementRepository announcementRepository;
+    private final AnnouncementSearchRepository announcementSearchRepository;
 
     @Override
     public Announcement saveAnnouncement(Announcement announcement) {
@@ -19,5 +26,10 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     @Override
     public Announcement getById(Long id) {
         return announcementRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("announcement with id "+id+" not found"));
+    }
+
+    @Override
+    public List<Announcement> searchAnnouncement(SearchAnnouncementRequest searchAnnouncementRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria) {
+        return announcementSearchRepository.search(searchAnnouncementRequest, pageCriteria, sortingCriteria);
     }
 }

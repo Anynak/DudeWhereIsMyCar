@@ -3,12 +3,15 @@ package com.innowise.DudeWhereIsMyCar.service;
 import com.innowise.DudeWhereIsMyCar.Mappers.UserMapper;
 import com.innowise.DudeWhereIsMyCar.dto.request.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.request.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.request.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.request.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.entity.Role;
 import com.innowise.DudeWhereIsMyCar.entity.User;
 import com.innowise.DudeWhereIsMyCar.exceptions.EmailAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.PhoneNumberAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.UserAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
+import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final UserSearchRepository userSearchRepository;
 
     @Override
     public User findUserBuLogin(String login) {
@@ -66,6 +70,13 @@ public class UserServiceImpl implements UserService {
         boolean phoneExists = userRepository.existsByPhone(userReq.getPhone());
         if (phoneExists)
             throw new PhoneNumberAlreadyExistsException("phone number " + userReq.getPhone() + " already exists");
+    }
+
+    public List<User> searchUser(
+            SearchUserRequest searchUserRequest
+            , PageCriteria pageCriteria
+            , SortingCriteria sortingCriteria){
+        return userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
     }
 
 }

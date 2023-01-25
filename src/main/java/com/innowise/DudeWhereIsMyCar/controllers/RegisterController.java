@@ -25,7 +25,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
-        if (principal != null) throw new AlreadyLoggedException("you are already logged");
+        if (principal != null) throw new AlreadyLoggedException();
 
         User user = userService.registerUser(userRequest);
         UserResponse response = userMapper.toUserResponse(user);

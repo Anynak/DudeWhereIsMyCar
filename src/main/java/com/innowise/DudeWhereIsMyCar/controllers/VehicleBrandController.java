@@ -5,6 +5,7 @@ import com.innowise.DudeWhereIsMyCar.dto.request.VehicleBrandRequest;
 import com.innowise.DudeWhereIsMyCar.dto.response.VehicleBrandResponse;
 import com.innowise.DudeWhereIsMyCar.entity.VehicleBrand;
 import com.innowise.DudeWhereIsMyCar.service.VehicleBrandService;
+import com.innowise.DudeWhereIsMyCar.validators.ValidList;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,9 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,7 +25,7 @@ public class VehicleBrandController {
     private final VehicleBrandMapper vehicleBrandMapper;
 
     @PostMapping("/setVehicleBrands")
-    public ResponseEntity<List<VehicleBrandResponse>> addVehicleBrands(@RequestBody @Valid Set<VehicleBrandRequest> vehicleBrandsRequest) {
+    public ResponseEntity<List<VehicleBrandResponse>> addVehicleBrands(@RequestBody @Valid ValidList<VehicleBrandRequest> vehicleBrandsRequest) {
         List<VehicleBrand> savedVehicleBrands = vehicleBrandService.addAllVehicleBrands(vehicleBrandMapper.toVehicleBrands(vehicleBrandsRequest));
         return new ResponseEntity<>(
                 vehicleBrandMapper.toVehicleBrandsResponse(savedVehicleBrands),

@@ -5,6 +5,7 @@ import com.innowise.DudeWhereIsMyCar.dto.request.VehicleTypeRequest;
 import com.innowise.DudeWhereIsMyCar.dto.response.VehicleTypeResponse;
 import com.innowise.DudeWhereIsMyCar.entity.VehicleType;
 import com.innowise.DudeWhereIsMyCar.service.VehicleTypeService;
+import com.innowise.DudeWhereIsMyCar.validators.ValidList;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class VehicleTypeController {
 
     @PostMapping("/setVehicleTypes")
     public ResponseEntity<List<VehicleTypeResponse>> addVehicleTypes(
-            @RequestBody @Valid List<VehicleTypeRequest> vehicleTypeRequests) {
+            @RequestBody @Valid ValidList<VehicleTypeRequest> vehicleTypeRequests) {
         List<VehicleType> vehicleTypes = vehicleTypeService.saveAll(vehicleTypeMapper.toVehicleTypes(vehicleTypeRequests));
         List<VehicleTypeResponse> vehicleTypeResponses = vehicleTypeMapper.toVehicleTypeResponses(vehicleTypes);
         return new ResponseEntity<>(vehicleTypeResponses, HttpStatus.OK);

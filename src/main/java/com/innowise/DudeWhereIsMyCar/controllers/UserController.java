@@ -7,7 +7,6 @@ import com.innowise.DudeWhereIsMyCar.dto.request.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.response.UserResponse;
 import com.innowise.DudeWhereIsMyCar.dto.response.UserResponseFull;
 import com.innowise.DudeWhereIsMyCar.entity.User;
-import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepository;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
-    private final UserSearchRepository userSearchRepository;
+
 
     @GetMapping("/get")
     public ResponseEntity<List<UserResponse>> getUsers(@Valid PageCriteria pageCriteria) {
@@ -44,7 +43,7 @@ public class UserController {
             @Valid PageCriteria pageCriteria,
             @Valid SortingCriteria sortingCriteria) {
 
-        List<User> users = userSearchRepository.findAll(searchUserRequest, pageCriteria, sortingCriteria);
+        List<User> users = userService.searchUser(searchUserRequest, pageCriteria, sortingCriteria);
         return new ResponseEntity<>(userMapper.toUserResponseFull(users), HttpStatus.OK);
     }
 }

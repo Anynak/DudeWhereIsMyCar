@@ -2,6 +2,9 @@ package com.innowise.DudeWhereIsMyCar.controllers;
 
 import com.innowise.DudeWhereIsMyCar.Mappers.AnnouncementMapper;
 import com.innowise.DudeWhereIsMyCar.dto.request.AnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.dto.request.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.request.SearchAnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.dto.request.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.response.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.entity.Announcement;
 import com.innowise.DudeWhereIsMyCar.entity.User;
@@ -12,12 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,5 +38,15 @@ public class AnnouncementController {
         AnnouncementResponse response = announcementMapper.toAnnouncementResponse(announcementService.saveAnnouncement(announcement));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
+    }
+
+    @GetMapping("/announcements")
+    public ResponseEntity<List<AnnouncementResponse>> findAnnouncement(
+            @Valid SearchAnnouncementRequest searchAnnouncementRequest,
+            @Valid PageCriteria pageCriteria,
+            @Valid SortingCriteria sortingCriteria) {
+
+        List<Announcement> announcements = announcementService.searchAnnouncement(searchAnnouncementRequest, pageCriteria, sortingCriteria);
+        return new ResponseEntity<>(announcementMapper.toAnnouncementResponse(announcements), HttpStatus.OK);
     }
 }

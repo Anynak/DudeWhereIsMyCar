@@ -1,9 +1,9 @@
 package com.innowise.DudeWhereIsMyCar.repositories;
 
 import com.innowise.DudeWhereIsMyCar.dto.request.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.dto.request.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.request.SearchAnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.dto.request.SortingCriteria;
-import com.innowise.DudeWhereIsMyCar.entity.User;
+import com.innowise.DudeWhereIsMyCar.entity.Announcement;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -13,20 +13,19 @@ import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class UserSearchRepositoryImpl implements UserSearchRepository {
+public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepository {
     private final EntityManager em;
 
     @Override
-    public List<User> search(SearchUserRequest searchRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria) {
+    public List<Announcement> search(SearchAnnouncementRequest searchRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        CriteriaQuery<Announcement> criteriaQuery = criteriaBuilder.createQuery(Announcement.class);
 
-        Root<User> root = criteriaQuery.from(User.class);
+        Root<Announcement> root = criteriaQuery.from(Announcement.class);
 
         if (sortingCriteria.getASC()) {
             criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
@@ -34,29 +33,13 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
             criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
         }
 
-
-        List<Predicate> predicates = new ArrayList<>();
-        if (searchRequest.getCountry() != null) {
-            Predicate countryPredicate = criteriaBuilder
-                    .like(root.get("country"), "%" + searchRequest.getCountry() + "%");
-            predicates.add(countryPredicate);
-        }
-
-        if (searchRequest.getCity() != null) {
-            Predicate cityPredicate = criteriaBuilder
-                    .like(root.get("city"), "%" + searchRequest.getCity() + "%");
-            predicates.add(cityPredicate);
-        }
-
-        Predicate orPredicate = criteriaBuilder.or(predicates.toArray(new Predicate[0]));
-        criteriaQuery.where(orPredicate);
-        TypedQuery<User> query = em.createQuery(criteriaQuery);
+        Predicate priceRangePredicate = criteriaBuilder.between(root.get("price"), searchRequest.getMinPrice(), searchRequest.getMaxPrice());
+        criteriaQuery.where(priceRangePredicate);
+        TypedQuery<Announcement> query = em.createQuery(criteriaQuery);
         if (pageCriteria != null) {
             query.setFirstResult((pageCriteria.getPageNumber() - 1) * pageCriteria.getPageSize());
             query.setMaxResults(pageCriteria.getPageSize());
         }
-
-
         return query.getResultList();
     }
 }

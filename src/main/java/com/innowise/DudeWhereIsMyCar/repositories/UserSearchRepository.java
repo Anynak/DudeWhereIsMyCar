@@ -8,5 +8,5 @@ import com.innowise.DudeWhereIsMyCar.entity.User;
 import java.util.List;
 
 public interface UserSearchRepository {
-    List<User> findAll(SearchUserRequest searchUserRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria);
+    List<User> search(SearchUserRequest searchUserRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria);
 }
