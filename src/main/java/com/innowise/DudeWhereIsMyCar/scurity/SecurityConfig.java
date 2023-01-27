@@ -16,7 +16,7 @@ public class SecurityConfig {
                 .csrf().disable().cors().disable()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/**", "/register", "/logout", "/login", "/swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs.yaml").permitAll()
+                        "/register", "/logout", "/login", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml").permitAll()
                 .requestMatchers(
                         "/api/setVehicleBrands"
                         , "/api/deleteVehicleBrand"
@@ -24,7 +24,7 @@ public class SecurityConfig {
                         , "/api/deleteVehicleModel"
                         , "/api/user/*"
                 ).hasAuthority("ADMIN")
-                //.anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()

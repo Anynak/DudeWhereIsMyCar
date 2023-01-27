@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(newUser);
     }
 
-    private void checkUserBeforeRegister(RegisterUserRequest userReq) {
+    private void checkUserBeforeRegister(RegisterUserRequest userReq)  {
 
         boolean loginExists = userRepository.existsByLogin(userReq.getLogin());
         if (loginExists) throw new UserAlreadyExistsException("login " + userReq.getLogin() + " already exists");

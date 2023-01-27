@@ -13,6 +13,7 @@ import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -33,8 +34,43 @@ public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepos
             criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
         }
 
-        Predicate priceRangePredicate = criteriaBuilder.between(root.get("price"), searchRequest.getMinPrice(), searchRequest.getMaxPrice());
-        criteriaQuery.where(priceRangePredicate);
+        List<Predicate> predicates = new ArrayList<>();
+
+        Predicate isDeletedPredicate = criteriaBuilder.isFalse(root.get("isDeleted"));
+        predicates.add(isDeletedPredicate);
+
+        Predicate priceRangePredicate = criteriaBuilder.between(root.get("price"), searchRequest.getPriceMin(), searchRequest.getPriceMax());
+        predicates.add(priceRangePredicate);
+
+        Predicate mileageRangePredicate = criteriaBuilder.between(root.get("vehicle").get("mileage"), searchRequest.getMileageMin(), searchRequest.getMileageMax());
+        predicates.add(mileageRangePredicate);
+
+        Predicate releaseYearRangePredicate = criteriaBuilder.between(root.get("vehicle").get("releaseYear"), searchRequest.getReleaseYearMin(), searchRequest.getReleaseYearMax());
+        predicates.add(releaseYearRangePredicate);
+
+        if (searchRequest.getColor() != null) {
+            Predicate colorPredicate = criteriaBuilder.like(root.get("vehicle").get("color"), "%" + searchRequest.getColor() + "%");
+            predicates.add(colorPredicate);
+        }
+
+        if (searchRequest.getVehicleBrandName() != null) {
+            Predicate brandPredicate = criteriaBuilder.like(root.get("vehicle").get("vehicleModel").get("vehicleBrand").get("vehicleBrandName"), "%" + searchRequest.getVehicleBrandName() + "%");
+            predicates.add(brandPredicate);
+        }
+
+        if (searchRequest.getVehicleModelName() != null) {
+            Predicate modelPredicate = criteriaBuilder.like(root.get("vehicle").get("vehicleModel").get("vehicleModelName"), "%" + searchRequest.getVehicleModelName() + "%");
+            predicates.add(modelPredicate);
+        }
+
+        if (searchRequest.getVehicleTypeName() != null) {
+            Predicate modelPredicate = criteriaBuilder.like(root.get("vehicle").get("vehicleType").get("typeName"), "%" + searchRequest.getVehicleTypeName() + "%");
+            predicates.add(modelPredicate);
+        }
+
+        Predicate andPredicate = criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+
+        criteriaQuery.where(andPredicate);
         TypedQuery<Announcement> query = em.createQuery(criteriaQuery);
         if (pageCriteria != null) {
             query.setFirstResult((pageCriteria.getPageNumber() - 1) * pageCriteria.getPageSize());

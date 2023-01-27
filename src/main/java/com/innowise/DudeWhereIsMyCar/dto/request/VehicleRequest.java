@@ -1,5 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.dto.request;
 
+import com.innowise.DudeWhereIsMyCar.Const.Const;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,11 +11,12 @@ import lombok.Data;
 public class VehicleRequest {
     private Long vehicleId;
 
-    @Min(value = 0)
+    @Max(Const.MAX_MILEAGE)
+    @Min(0)
     private Integer mileage = 0;
 
     @NotNull
-    @Min(1886)
+    @Min(Const.MIN_RELEASE_YEAR)
     private Integer releaseYear;
 
     @NotNull
