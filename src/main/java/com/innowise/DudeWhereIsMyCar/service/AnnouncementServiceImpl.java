@@ -25,11 +25,18 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public Announcement getById(Long id) {
-        return announcementRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("announcement with id "+id+" not found"));
+        return announcementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("announcement with id " + id + " not found"));
     }
 
     @Override
     public List<Announcement> searchAnnouncement(SearchAnnouncementRequest searchAnnouncementRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria) {
         return announcementSearchRepository.search(searchAnnouncementRequest, pageCriteria, sortingCriteria);
+    }
+
+    @Override
+    public Announcement deleteAnnouncement(Long id) {
+        Announcement announcement = getById(id);
+        announcement.setIsDeleted(true);
+        return announcementRepository.save(announcement);
     }
 }

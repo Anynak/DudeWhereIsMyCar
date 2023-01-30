@@ -9,6 +9,7 @@ import com.innowise.DudeWhereIsMyCar.entity.Role;
 import com.innowise.DudeWhereIsMyCar.entity.User;
 import com.innowise.DudeWhereIsMyCar.exceptions.EmailAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.PhoneNumberAlreadyExistsException;
+import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
 import com.innowise.DudeWhereIsMyCar.exceptions.UserAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
 import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepository;
@@ -37,6 +38,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserByLogin(login).orElseThrow(() -> new UsernameNotFoundException("user " + login + " not found"));
     }
 
+
     @Override
     public List<User> getUsers(PageCriteria pageCriteria) {
         Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize());
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(newUser);
     }
 
-    private void checkUserBeforeRegister(RegisterUserRequest userReq)  {
+    private void checkUserBeforeRegister(RegisterUserRequest userReq) {
 
         boolean loginExists = userRepository.existsByLogin(userReq.getLogin());
         if (loginExists) throw new UserAlreadyExistsException("login " + userReq.getLogin() + " already exists");
@@ -75,8 +77,20 @@ public class UserServiceImpl implements UserService {
     public List<User> searchUser(
             SearchUserRequest searchUserRequest
             , PageCriteria pageCriteria
-            , SortingCriteria sortingCriteria){
+            , SortingCriteria sortingCriteria) {
         return userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
+    }
+
+    @Override
+    public User deleteUserById(Long id) {
+        User user = findUserById(id);
+        user.setIsDeleted(true);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no user with id " + id));
     }
 
 }

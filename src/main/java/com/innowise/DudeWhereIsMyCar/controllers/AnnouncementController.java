@@ -30,7 +30,7 @@ public class AnnouncementController {
     private final AnnouncementMapper announcementMapper;
     private final UserService userService;
 
-    @PostMapping("/addAnnouncement")
+    @PostMapping("/announcement")
     public ResponseEntity<AnnouncementResponse> addAnnouncementController(@RequestBody @Valid AnnouncementRequest announcementRequest, Principal principal) {
         Announcement announcement = announcementMapper.toAnnouncement(announcementRequest);
         User user = userService.findUserBuLogin(principal.getName());
@@ -48,5 +48,12 @@ public class AnnouncementController {
 
         List<Announcement> announcements = announcementService.searchAnnouncement(searchAnnouncementRequest, pageCriteria, sortingCriteria);
         return new ResponseEntity<>(announcementMapper.toAnnouncementResponse(announcements), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/announcement/{id}")
+    public ResponseEntity<AnnouncementResponse> deleteAnnouncementController(@PathVariable @Valid Long id) {
+        Announcement deletedAnnouncement = announcementService.deleteAnnouncement(id);
+        return new ResponseEntity<>(announcementMapper.toAnnouncementResponse(deletedAnnouncement), HttpStatus.OK);
+
     }
 }

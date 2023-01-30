@@ -16,4 +16,8 @@ public interface UserService {
             SearchUserRequest searchUserRequest
             , PageCriteria pageCriteria
             , SortingCriteria sortingCriteria);
+
+    User deleteUserById(Long id);
+
+    User findUserById(Long id);
 }

@@ -3,7 +3,6 @@ package com.innowise.DudeWhereIsMyCar.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 @Data
 @Entity
@@ -32,7 +31,4 @@ public class Vehicle {
     @JoinColumn(nullable = false)
     private VehicleModel vehicleModel;
 
-    @Column(name = "is_deleted", nullable = false)
-    @ColumnDefault("false")
-    private Boolean isDeleted = false;
 }

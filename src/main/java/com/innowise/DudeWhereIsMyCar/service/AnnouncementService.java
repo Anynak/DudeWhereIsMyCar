@@ -16,4 +16,7 @@ public interface AnnouncementService {
             SearchAnnouncementRequest searchAnnouncementRequest
             , PageCriteria pageCriteria
             , SortingCriteria sortingCriteria);
+
+    Announcement deleteAnnouncement(Long id);
+
 }
