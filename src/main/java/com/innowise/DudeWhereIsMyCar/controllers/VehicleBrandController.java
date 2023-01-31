@@ -24,7 +24,7 @@ public class VehicleBrandController {
     private final VehicleBrandService vehicleBrandService;
     private final VehicleBrandMapper vehicleBrandMapper;
 
-    @PostMapping("/setVehicleBrands")
+    @PostMapping("/vehicleBrands")
     public ResponseEntity<List<VehicleBrandResponse>> addVehicleBrands(@RequestBody @Valid ValidList<VehicleBrandRequest> vehicleBrandsRequest) {
         List<VehicleBrand> savedVehicleBrands = vehicleBrandService.addAllVehicleBrands(vehicleBrandMapper.toVehicleBrands(vehicleBrandsRequest));
         return new ResponseEntity<>(
@@ -33,13 +33,13 @@ public class VehicleBrandController {
         );
     }
 
-    @DeleteMapping("/deleteVehicleBrand/{brandId}")
+    @DeleteMapping("/vehicleBrand/{brandId}")
     public ResponseEntity<?> removeVehicleBrand(@PathVariable Long brandId) {
         vehicleBrandService.removeVehicleBrandById(brandId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/getVehicleBrands")
+    @GetMapping("/vehicleBrands")
     public ResponseEntity<List<VehicleBrandResponse>> getVehicleBrands() {
         return new ResponseEntity<>(
                 vehicleBrandMapper.toVehicleBrandsResponse(vehicleBrandService.getAllVehicleBrands()),

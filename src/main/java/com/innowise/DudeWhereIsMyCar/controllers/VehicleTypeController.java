@@ -23,7 +23,7 @@ public class VehicleTypeController {
     private final VehicleTypeMapper vehicleTypeMapper;
     private final VehicleTypeService vehicleTypeService;
 
-    @PostMapping("/setVehicleTypes")
+    @PostMapping("/vehicleTypes")
     public ResponseEntity<List<VehicleTypeResponse>> addVehicleTypes(
             @RequestBody @Valid ValidList<VehicleTypeRequest> vehicleTypeRequests) {
         List<VehicleType> vehicleTypes = vehicleTypeService.saveAll(vehicleTypeMapper.toVehicleTypes(vehicleTypeRequests));
@@ -31,13 +31,13 @@ public class VehicleTypeController {
         return new ResponseEntity<>(vehicleTypeResponses, HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteVehicleType/{typeId}")
+    @DeleteMapping("vehicleType/{typeId}")
     public ResponseEntity<VehicleTypeResponse> deleteVehicleType(@PathVariable Long typeId) {
         vehicleTypeService.deleteVehicleType(typeId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/getVehicleTypes")
+    @GetMapping("/vehicleTypes")
     public ResponseEntity<List<VehicleTypeResponse>> getVehicleTypes() {
         return new ResponseEntity<>(vehicleTypeMapper.toVehicleTypeResponses(vehicleTypeService.getAllVehicleTypes()), HttpStatus.OK);
     }

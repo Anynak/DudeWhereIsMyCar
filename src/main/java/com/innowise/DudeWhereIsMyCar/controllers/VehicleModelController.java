@@ -26,7 +26,7 @@ public class VehicleModelController {
     private final VehicleModelMapper vehicleModelMapper;
     private final VehicleModelService vehicleModelService;
 
-    @PostMapping("/setVehicleModels")
+    @PostMapping("/vehicleModels")
     public ResponseEntity<List<VehicleModelResponse>> addVehicleModels(@RequestBody @Valid ValidList<VehicleModelRequest> vehicleModelsRequest) {
         List<VehicleModel> vm = vehicleModelMapper.toVehicleModels(vehicleModelsRequest);
         List<VehicleModel> savedVehicleModels = vehicleModelService.addVehicleModels(vm);
@@ -36,13 +36,13 @@ public class VehicleModelController {
         );
     }
 
-    @DeleteMapping("/deleteVehicleModel/{modelId}")
+    @DeleteMapping("/vehicleModel/{modelId}")
     public ResponseEntity<?> removeVehicleModel(@PathVariable Long modelId) {
         vehicleModelService.removeVehicleModelById(modelId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/getVehicleModels")
+    @GetMapping("/vehicleModels")
     public ResponseEntity<List<VehicleModelResponse>> getVehicleModels() {
         return new ResponseEntity<>(vehicleModelMapper.toVehicleModelResponses(vehicleModelService.getAllVehicleModels()), HttpStatus.OK);
     }
