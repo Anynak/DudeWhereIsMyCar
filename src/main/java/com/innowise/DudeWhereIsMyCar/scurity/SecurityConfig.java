@@ -29,7 +29,10 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/**").permitAll()
+                        "/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml"
+                        //, "/**"
+                )
+                .permitAll()
                 .requestMatchers(
                         "/api/setVehicleBrands"
                         , "/api/deleteVehicleBrand"
@@ -44,6 +47,7 @@ public class SecurityConfig {
                 .logout().logoutSuccessUrl("/")
                 .and()
                 .httpBasic();
+        httpSecurity.cors();
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
