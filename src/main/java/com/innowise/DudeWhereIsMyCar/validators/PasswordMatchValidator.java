@@ -1,6 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.validators;
 
-import com.innowise.DudeWhereIsMyCar.dto.request.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.user.RegisterUserRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

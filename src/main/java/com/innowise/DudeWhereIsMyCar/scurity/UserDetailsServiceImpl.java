@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.scurity;
 
-import com.innowise.DudeWhereIsMyCar.entity.User;
-import com.innowise.DudeWhereIsMyCar.service.UserService;
+import com.innowise.DudeWhereIsMyCar.user.User;
+import com.innowise.DudeWhereIsMyCar.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

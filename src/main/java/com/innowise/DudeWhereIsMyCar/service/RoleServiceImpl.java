@@ -1,8 +1,8 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
-import com.innowise.DudeWhereIsMyCar.entity.Role;
+import com.innowise.DudeWhereIsMyCar.role.Role;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
-import com.innowise.DudeWhereIsMyCar.repositories.RoleRepository;
+import com.innowise.DudeWhereIsMyCar.role.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
