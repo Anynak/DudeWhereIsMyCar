@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.scurity;
 
-import com.innowise.DudeWhereIsMyCar.role.Role;
-import com.innowise.DudeWhereIsMyCar.user.User;
+import com.innowise.DudeWhereIsMyCar.model.Role;
+import com.innowise.DudeWhereIsMyCar.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

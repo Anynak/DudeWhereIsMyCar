@@ -1,12 +1,12 @@
 package com.innowise.DudeWhereIsMyCar.authentication;
 
-import com.innowise.DudeWhereIsMyCar.user.UserMapper;
-import com.innowise.DudeWhereIsMyCar.user.RegisterUserRequest;
-import com.innowise.DudeWhereIsMyCar.user.UserResponse;
-import com.innowise.DudeWhereIsMyCar.user.User;
+import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
+import com.innowise.DudeWhereIsMyCar.model.User;
 import com.innowise.DudeWhereIsMyCar.scurity.JWTGenerator;
-import com.innowise.DudeWhereIsMyCar.user.UserService;
+import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
