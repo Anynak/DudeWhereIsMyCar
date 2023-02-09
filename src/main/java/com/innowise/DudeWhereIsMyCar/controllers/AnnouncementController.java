@@ -22,7 +22,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/announcements")
 @Validated
 public class AnnouncementController {
 
@@ -30,7 +30,7 @@ public class AnnouncementController {
     private final AnnouncementMapper announcementMapper;
     private final UserService userService;
 
-    @PostMapping("/announcement")
+    @PostMapping("/v1")
     public ResponseEntity<AnnouncementResponse> addAnnouncementController(@RequestBody @Valid AnnouncementRequest announcementRequest, Principal principal) {
         Announcement announcement = announcementMapper.toAnnouncement(announcementRequest);
         User user = userService.findUserBuLogin(principal.getName());
@@ -40,7 +40,7 @@ public class AnnouncementController {
 
     }
 
-    @GetMapping("/announcement")
+    @GetMapping("/v1")
     public List<AnnouncementResponse> findAnnouncement(
             @Valid SearchAnnouncementRequest searchAnnouncementRequest,
             @Valid PageCriteria pageCriteria,
@@ -50,7 +50,7 @@ public class AnnouncementController {
         return announcementMapper.toAnnouncementResponse(announcements);
     }
 
-    @DeleteMapping("/announcement/{id}")
+    @DeleteMapping("/v1/{id}")
     public AnnouncementResponse deleteAnnouncementController(@PathVariable @Valid Long id) {
         Announcement deletedAnnouncement = announcementService.deleteAnnouncement(id);
         return announcementMapper.toAnnouncementResponse(deletedAnnouncement);

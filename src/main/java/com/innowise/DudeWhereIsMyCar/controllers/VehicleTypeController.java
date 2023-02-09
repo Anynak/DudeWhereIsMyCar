@@ -18,12 +18,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Validated
-@RequestMapping("/api")
+@RequestMapping("/vehicleTypes")
 public class VehicleTypeController {
     private final VehicleTypeMapper vehicleTypeMapper;
     private final VehicleTypeService vehicleTypeService;
 
-    @PostMapping("/vehicleType")
+    @PostMapping("/v1")
     public ResponseEntity<List<VehicleTypeResponse>> addVehicleTypes(
             @RequestBody @Valid ValidList<VehicleTypeRequest> vehicleTypeRequests) {
         List<VehicleType> vehicleTypes = vehicleTypeService.saveAll(vehicleTypeMapper.toVehicleTypes(vehicleTypeRequests));
@@ -31,13 +31,13 @@ public class VehicleTypeController {
         return new ResponseEntity<>(vehicleTypeResponses, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("vehicleType/{typeId}")
+    @DeleteMapping("v1/{typeId}")
     public ResponseEntity<?> deleteVehicleType(@PathVariable Long typeId) {
         vehicleTypeService.deleteVehicleType(typeId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/vehicleType")
+    @GetMapping("/v1")
     public List<VehicleTypeResponse> getVehicleTypes() {
         return vehicleTypeMapper.toVehicleTypeResponses(vehicleTypeService.getAllVehicleTypes());
     }

@@ -35,23 +35,29 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
-        List<String> errors = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(error.getField() + ": " + error.getDefaultMessage());
-        }
-        for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
-            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
-        }
+        List<ApiError> apiErrors = new ArrayList<>();
 
-        ApiError apiError =
-                new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            String userMessage = fieldError.getField() + " " + fieldError.getDefaultMessage();
+            ApiError apiError = new ApiError(httpStatus, userMessage, userMessage);
+            apiErrors.add(apiError);
+        }
+        for (ObjectError objectError : ex.getBindingResult().getGlobalErrors()) {
+            String userMessage = objectError.getDefaultMessage();
+            ApiError apiError = new ApiError(httpStatus, userMessage, userMessage);
+            apiErrors.add(apiError);
+        }
         return handleExceptionInternal(
-                ex, apiError, headers, apiError.getStatus(), request);
+                ex, apiErrors, headers, httpStatus, request);
     }
 
     private ResponseEntity<Object> createResponse(Exception ex, String errorText, HttpStatus httpStatus) {
-        ApiError apiError = new ApiError(httpStatus, ex.getLocalizedMessage(), errorText);
-        return new ResponseEntity<>(apiError, apiError.getStatus());
+        ApiError apiError = new ApiError(httpStatus, ex.getMessage(), errorText);
+        List<ApiError> errors = new ArrayList<>();
+        errors.add(apiError);
+        return new ResponseEntity<>(errors, httpStatus);
     }
 
     @ExceptionHandler(AlreadyLoggedException.class)

@@ -17,7 +17,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/users")
 @Validated
 public class UserController {
 
@@ -25,7 +25,7 @@ public class UserController {
     private final UserMapper userMapper;
 
 
-    @GetMapping("/user")
+    @GetMapping("/v1")
     public List<UserResponse> getUsers(@Valid PageCriteria pageCriteria) {
         List<User> users = userService.getUsers(pageCriteria);
         List<UserResponse> userResponses = userMapper.toUserResponse(users);
@@ -33,7 +33,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/search")
+    @GetMapping("/v1/search")
     public List<UserResponseFull> findUsers(
             @Valid SearchUserRequest searchUserRequest,
             @Valid PageCriteria pageCriteria,
@@ -43,7 +43,7 @@ public class UserController {
         return userMapper.toUserResponseFull(users);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/v1/{id}")
     public UserResponseFull deleteUser(@Valid @PathVariable Long id) {
         User deletedUser = userService.deleteUserById(id);
         return userMapper.toUserResponseFull(deletedUser);

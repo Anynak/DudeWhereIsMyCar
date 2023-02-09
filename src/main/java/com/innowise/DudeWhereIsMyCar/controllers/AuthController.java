@@ -1,8 +1,10 @@
-package com.innowise.DudeWhereIsMyCar.authentication;
+package com.innowise.DudeWhereIsMyCar.controllers;
 
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
+import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AuthResponseDTO;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.LoginDTO;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
 import com.innowise.DudeWhereIsMyCar.model.User;
 import com.innowise.DudeWhereIsMyCar.scurity.JWTGenerator;
@@ -23,23 +25,23 @@ import java.security.Principal;
 @RestController
 @Validated
 @RequiredArgsConstructor
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
     private final UserService userService;
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final JWTGenerator jwtGenerator;
 
-    @PostMapping("/register")
+    @PostMapping("/v1/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
-        if (principal != null) throw new AlreadyLoggedException();
+        if (principal != null) throw new AlreadyLoggedException("user "+principal.getName()+" is already logged");
 
         User user = userService.registerUser(userRequest);
         UserResponse response = userMapper.toUserResponse(user);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/v1/login")
     public ResponseEntity<AuthResponseDTO> registerUser(@RequestBody @Valid LoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

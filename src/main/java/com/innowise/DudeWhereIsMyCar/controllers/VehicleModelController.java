@@ -19,26 +19,26 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Validated
-@RequestMapping("/api")
+@RequestMapping("/vehicleModels")
 public class VehicleModelController {
 
     private final VehicleModelMapper vehicleModelMapper;
     private final VehicleModelService vehicleModelService;
 
-    @PostMapping("/vehicleModel")
+    @PostMapping("/v1")
     public List<VehicleModelResponse> addVehicleModels(@RequestBody @Valid ValidList<VehicleModelRequest> vehicleModelsRequest) {
         List<VehicleModel> vm = vehicleModelMapper.toVehicleModels(vehicleModelsRequest);
         List<VehicleModel> savedVehicleModels = vehicleModelService.addVehicleModels(vm);
         return vehicleModelMapper.toVehicleModelResponses(savedVehicleModels);
     }
 
-    @DeleteMapping("/vehicleModel/{modelId}")
+    @DeleteMapping("/v1/{modelId}")
     public ResponseEntity<?> removeVehicleModel(@PathVariable Long modelId) {
         vehicleModelService.removeVehicleModelById(modelId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/vehicleModel")
+    @GetMapping("/v1")
     public List<VehicleModelResponse> getVehicleModels() {
         return vehicleModelMapper.toVehicleModelResponses(vehicleModelService.getAllVehicleModels());
     }

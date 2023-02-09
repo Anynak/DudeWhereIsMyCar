@@ -29,16 +29,15 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml"
+                        "/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml"
                         //, "/**"
                 )
                 .permitAll()
                 .requestMatchers(
-                        "/api/setVehicleBrands"
-                        , "/api/deleteVehicleBrand"
-                        , "/api/setVehicleModels"
-                        , "/api/deleteVehicleModel"
-                        , "/api/user/*"
+                        "/vehicleTypes"
+                        , "/vehicleBrands"
+                        , "/vehicleModels"
+                        , "/users/**"
                 ).hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()

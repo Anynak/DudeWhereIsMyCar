@@ -18,13 +18,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Validated
-@RequestMapping("/api")
+@RequestMapping("/vehicleBrands")
 public class VehicleBrandController {
 
     private final VehicleBrandService vehicleBrandService;
     private final VehicleBrandMapper vehicleBrandMapper;
 
-    @PostMapping("/vehicleBrand")
+    @PostMapping("/v1")
     public ResponseEntity<List<VehicleBrandResponse>> addVehicleBrands(@RequestBody @Valid ValidList<VehicleBrandRequest> vehicleBrandsRequest) {
         List<VehicleBrand> savedVehicleBrands = vehicleBrandService.addAllVehicleBrands(vehicleBrandMapper.toVehicleBrands(vehicleBrandsRequest));
         return new ResponseEntity<>(
@@ -33,13 +33,13 @@ public class VehicleBrandController {
         );
     }
 
-    @DeleteMapping("/vehicleBrand/{brandId}")
+    @DeleteMapping("/v1/{brandId}")
     public ResponseEntity<?> removeVehicleBrand(@PathVariable Long brandId) {
         vehicleBrandService.removeVehicleBrandById(brandId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/vehicleBrand")
+    @GetMapping("/v1")
     public List<VehicleBrandResponse> getVehicleBrands() {
         return vehicleBrandMapper.toVehicleBrandsResponse(vehicleBrandService.getAllVehicleBrands());
     }

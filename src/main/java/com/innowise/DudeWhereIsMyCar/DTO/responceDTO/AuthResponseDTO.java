@@ -1,4 +1,4 @@
-package com.innowise.DudeWhereIsMyCar.authentication;
+package com.innowise.DudeWhereIsMyCar.DTO.responceDTO;
 
 import lombok.Data;
 
