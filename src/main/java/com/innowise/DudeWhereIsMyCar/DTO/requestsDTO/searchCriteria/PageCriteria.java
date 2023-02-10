@@ -1,4 +1,4 @@
-package com.innowise.DudeWhereIsMyCar.searchCriteria;
+package com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria;
 
 import jakarta.validation.constraints.Min;
 import lombok.Data;

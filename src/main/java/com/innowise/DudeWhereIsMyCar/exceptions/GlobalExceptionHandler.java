@@ -4,26 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler {
 
 
     @Autowired
@@ -32,27 +30,26 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final Locale loc = LocaleContextHolder.getLocale();
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
+    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
+    protected ResponseEntity<Object> handleBind(Exception ex) {
+        BindingResult bindingResult = (BindingResult) ex;
         List<ApiError> apiErrors = new ArrayList<>();
 
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+        for (FieldError fieldError : bindingResult.getFieldErrors()) {
             String userMessage = fieldError.getField() + " " + fieldError.getDefaultMessage();
             ApiError apiError = new ApiError(httpStatus, userMessage, userMessage);
             apiErrors.add(apiError);
         }
-        for (ObjectError objectError : ex.getBindingResult().getGlobalErrors()) {
+        for (ObjectError objectError : bindingResult.getGlobalErrors()) {
             String userMessage = objectError.getDefaultMessage();
             ApiError apiError = new ApiError(httpStatus, userMessage, userMessage);
             apiErrors.add(apiError);
         }
-        return handleExceptionInternal(
-                ex, apiErrors, headers, httpStatus, request);
+        return new ResponseEntity<>(apiErrors, httpStatus);
     }
-
     private ResponseEntity<Object> createResponse(Exception ex, String errorText, HttpStatus httpStatus) {
         ApiError apiError = new ApiError(httpStatus, ex.getMessage(), errorText);
         List<ApiError> errors = new ArrayList<>();
@@ -91,10 +88,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
         return createResponse(ex, messageSource.getMessage("request.bad", null, loc), HttpStatus.BAD_REQUEST);
     }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnknownExceptions(Exception ex) {

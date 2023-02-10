@@ -2,11 +2,11 @@ package com.innowise.DudeWhereIsMyCar.controllers;
 
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
 import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponseFull;
 import com.innowise.DudeWhereIsMyCar.model.User;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,7 @@ public class UserController {
     @GetMapping("/v1")
     public List<UserResponse> getUsers(@Valid PageCriteria pageCriteria) {
         List<User> users = userService.getUsers(pageCriteria);
-        List<UserResponse> userResponses = userMapper.toUserResponse(users);
-        return userResponses;
+        return userMapper.toUserResponse(users);
 
     }
 

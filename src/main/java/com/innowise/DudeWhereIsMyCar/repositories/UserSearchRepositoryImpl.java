@@ -1,9 +1,9 @@
 package com.innowise.DudeWhereIsMyCar.repositories;
 
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.model.User;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.SortingCriteria;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -28,10 +28,12 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
 
         Root<User> root = criteriaQuery.from(User.class);
 
-        if (sortingCriteria.getASC()) {
-            criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
-        } else {
-            criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
+        if (sortingCriteria.getSortBy() != null) {
+            if (sortingCriteria.getASC()) {
+                criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
+            } else {
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
+            }
         }
 
 
@@ -51,6 +53,7 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
         Predicate orPredicate = criteriaBuilder.or(predicates.toArray(new Predicate[0]));
         criteriaQuery.where(orPredicate);
         TypedQuery<User> query = em.createQuery(criteriaQuery);
+        System.out.println(pageCriteria);
         if (pageCriteria != null) {
             query.setFirstResult((pageCriteria.getPageNumber() - 1) * pageCriteria.getPageSize());
             query.setMaxResults(pageCriteria.getPageSize());

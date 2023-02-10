@@ -3,6 +3,8 @@ package com.innowise.DudeWhereIsMyCar.service;
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.exceptions.EmailAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.PhoneNumberAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
@@ -11,8 +13,6 @@ import com.innowise.DudeWhereIsMyCar.model.Role;
 import com.innowise.DudeWhereIsMyCar.model.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
 import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepository;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.SortingCriteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsers(PageCriteria pageCriteria) {
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize());
+        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber() - 1, pageCriteria.getPageSize());
         return userRepository.findAll(pageable).stream().toList();
     }
 

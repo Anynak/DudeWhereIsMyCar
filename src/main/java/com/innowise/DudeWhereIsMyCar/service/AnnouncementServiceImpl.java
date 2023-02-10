@@ -1,12 +1,12 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.SearchAnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
 import com.innowise.DudeWhereIsMyCar.model.Announcement;
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementRepository;
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementSearchRepository;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.searchCriteria.SortingCriteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

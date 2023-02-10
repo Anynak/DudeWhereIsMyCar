@@ -40,8 +40,6 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:' + jsonwebtokenVersion
     implementation group: 'org.flywaydb', name: 'flyway-core', version: '9.14.1'
 
-
-
 }
 
 tasks.named('test') {

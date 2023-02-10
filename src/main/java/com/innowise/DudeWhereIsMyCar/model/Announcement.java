@@ -33,6 +33,7 @@ public class Announcement {
     private Float price;
 
     @Column(name = "comment")
+    @Lob
     private String comment;
 
     @Column(name = "is_deleted", nullable = false)

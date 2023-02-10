@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class VehicleTypeRequest {
 
-    @NotNull
+
     @Min(value = 1)
     private Long vehicleTypeId;
 
