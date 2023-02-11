@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserSearchRepository userSearchRepository;
+    private final BeforeRegisterUserChecker beforeRegisterUserChecker;
 
     @Override
     public User findUserBuLogin(String login) {
@@ -48,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(RegisterUserRequest userRequest) {
-        checkUserBeforeRegister(userRequest);
+        beforeRegisterUserChecker.check(userRequest);
         User newUser = userMapper.toUser(userRequest);
 
         Role defaultRole = roleService.getRoleByName("USER");
@@ -57,22 +59,10 @@ public class UserServiceImpl implements UserService {
         newUser.setRoles(defaultRoles);
 
         newUser.setPasswordHash(passwordEncoder.encode(userRequest.getPassword()));
-
         return userRepository.save(newUser);
     }
 
-    private void checkUserBeforeRegister(RegisterUserRequest userReq) {
 
-        boolean loginExists = userRepository.existsByLogin(userReq.getLogin());
-        if (loginExists) throw new UserAlreadyExistsException("login " + userReq.getLogin() + " already exists");
-
-        boolean emailExists = userRepository.existsByEmail(userReq.getEmail());
-        if (emailExists) throw new EmailAlreadyExistsException("email " + userReq.getEmail() + " already exists");
-
-        boolean phoneExists = userRepository.existsByPhone(userReq.getPhone());
-        if (phoneExists)
-            throw new PhoneNumberAlreadyExistsException("phone number " + userReq.getPhone() + " already exists");
-    }
 
     public List<User> searchUser(
             SearchUserRequest searchUserRequest
