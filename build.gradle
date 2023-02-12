@@ -40,6 +40,8 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:' + jsonwebtokenVersion
     implementation group: 'org.flywaydb', name: 'flyway-core', version: '9.14.1'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.1.1'
+    testImplementation 'com.h2database:h2:2.1.214'
+
 
 
 }
