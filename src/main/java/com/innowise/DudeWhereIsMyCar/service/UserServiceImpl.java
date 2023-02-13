@@ -2,13 +2,10 @@ package com.innowise.DudeWhereIsMyCar.service;
 
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
-import com.innowise.DudeWhereIsMyCar.exceptions.EmailAlreadyExistsException;
-import com.innowise.DudeWhereIsMyCar.exceptions.PhoneNumberAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
-import com.innowise.DudeWhereIsMyCar.exceptions.UserAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.model.Role;
 import com.innowise.DudeWhereIsMyCar.model.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
@@ -18,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

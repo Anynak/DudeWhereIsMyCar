@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 public class SortingCriteria {
 
-    @NotNull(message = "sortBy can't be null")
-    @NotBlank
+    //@NotNull(message = "sortBy can't be null")
+    //@NotBlank
     private String sortBy;
 
-    @NotNull
+    //@NotNull
     private Boolean ASC = true;
 
 }

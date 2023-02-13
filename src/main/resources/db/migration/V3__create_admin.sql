@@ -8,7 +8,7 @@ values ( 666
        , false
        , 'admin'
        , 'Toha'
-       , '$2a$10$OxFn/e0lLNpxJEoPFeyAxef.DsHPeTKFVZYYFvl5tg5yE.kTHw7ca'
+       , '$2a$10$Na2W/u7IMKlHd.PlXcFy7uyBKJvXI7mSP/kmMn34sTcAmYqNRdDI6'
        , '+375295159508');
 
 insert into dude_where_is_my_car.user_role

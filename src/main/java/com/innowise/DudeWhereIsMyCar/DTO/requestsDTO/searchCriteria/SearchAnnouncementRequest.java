@@ -1,4 +1,4 @@
-package com.innowise.DudeWhereIsMyCar.DTO.requestsDTO;
+package com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria;
 
 import com.innowise.DudeWhereIsMyCar.Const.Const;
 import lombok.Data;

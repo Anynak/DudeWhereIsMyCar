@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.repositories;
 
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.model.User;
 import jakarta.persistence.EntityManager;
@@ -25,10 +25,9 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
     public List<User> search(SearchUserRequest searchRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-
         Root<User> root = criteriaQuery.from(User.class);
 
-        if (sortingCriteria.getSortBy() != null) {
+        if (sortingCriteria != null && sortingCriteria.getSortBy() != null) {
             if (sortingCriteria.getASC()) {
                 criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
             } else {
@@ -36,8 +35,22 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
             }
         }
 
+        Predicate orPredicate = createPredicate(searchRequest, criteriaBuilder, root);
+        criteriaQuery.where(orPredicate);
 
+        TypedQuery<User> query = em.createQuery(criteriaQuery);
+        if (pageCriteria != null) {
+            query.setFirstResult((pageCriteria.getPageNumber() - 1) * pageCriteria.getPageSize());
+            query.setMaxResults(pageCriteria.getPageSize());
+        }
+
+
+        return query.getResultList();
+    }
+
+    private Predicate createPredicate(SearchUserRequest searchRequest, CriteriaBuilder criteriaBuilder, Root<User> root) {
         List<Predicate> predicates = new ArrayList<>();
+
         if (searchRequest.getCountry() != null) {
             Predicate countryPredicate = criteriaBuilder
                     .like(root.get("country"), "%" + searchRequest.getCountry() + "%");
@@ -49,17 +62,6 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
                     .like(root.get("city"), "%" + searchRequest.getCity() + "%");
             predicates.add(cityPredicate);
         }
-
-        Predicate orPredicate = criteriaBuilder.or(predicates.toArray(new Predicate[0]));
-        criteriaQuery.where(orPredicate);
-        TypedQuery<User> query = em.createQuery(criteriaQuery);
-        System.out.println(pageCriteria);
-        if (pageCriteria != null) {
-            query.setFirstResult((pageCriteria.getPageNumber() - 1) * pageCriteria.getPageSize());
-            query.setMaxResults(pageCriteria.getPageSize());
-        }
-
-
-        return query.getResultList();
+        return criteriaBuilder.or(predicates.toArray(new Predicate[0]));
     }
 }
