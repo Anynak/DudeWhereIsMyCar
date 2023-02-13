@@ -83,9 +83,76 @@ public class UserSearchRepositoryImplTest {
         List<User> sumOfPages = new ArrayList<>(usersInFirstPage);
         sumOfPages.addAll(usersInSecondPage);
         System.out.println(sumOfPages);
-        List<User> sortedSumOfPages = sumOfPages.stream().sorted(Comparator.comparing(User::getUserId)).collect(Collectors.toList());
+        List<User> sortedSumOfPages = sumOfPages.stream()
+                .sorted(Comparator.comparing(User::getUserId)).toList();
 
+        Assertions.assertNotEquals(0, usersInGeneralPage.size());
         Assertions.assertEquals(usersInGeneralPage, sortedSumOfPages);
+    }
+
+    @Test
+    public void ifASCSortingCorrect() {
+        SearchUserRequest searchUserRequest = new SearchUserRequest();
+        PageCriteria pageCriteria = new PageCriteria();
+        SortingCriteria sortingCriteria = new SortingCriteria();
+        String sortField = "name";
+        sortingCriteria.setSortBy(sortField);
+
+        List<User> sortedByNameUsersActual = userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
+        List<User> sortedByNameUsersExpected = sortedByNameUsersActual.stream()
+                .sorted(Comparator.comparing(User::getName)).toList();
+
+        Assertions.assertNotEquals(0, sortedByNameUsersActual.size());
+        Assertions.assertEquals(sortedByNameUsersExpected, sortedByNameUsersActual);
+    }
+
+    @Test
+    public void ifNotASCSortingCorrect() {
+        SearchUserRequest searchUserRequest = new SearchUserRequest();
+        PageCriteria pageCriteria = new PageCriteria();
+        SortingCriteria sortingCriteria = new SortingCriteria();
+        String sortField = "name";
+        sortingCriteria.setSortBy(sortField);
+        sortingCriteria.setASC(false);
+
+        List<User> sortedByNameUsersActual = userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
+        List<User> sortedByNameUsersExpected = sortedByNameUsersActual.stream()
+                .sorted(Comparator.comparing(User::getName).reversed()).toList();
+
+        Assertions.assertNotEquals(0, sortedByNameUsersActual.size());
+        Assertions.assertEquals(sortedByNameUsersExpected, sortedByNameUsersActual);
+    }
+
+    @Test
+    public void ifSearchByCountryCorrect() {
+        PageCriteria pageCriteria = new PageCriteria();
+        pageCriteria.setPageSize(100);
+        SortingCriteria sortingCriteria = new SortingCriteria();
+        SearchUserRequest searchUserRequest = new SearchUserRequest();
+        String searchingCountry = "search";
+        searchUserRequest.setCountry(searchingCountry);
+
+        List<User> usersActual = userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
+        Assertions.assertNotEquals(0, usersActual.size());
+        for (User user : usersActual) {
+            Assertions.assertTrue(user.getCountry().contains(searchingCountry));
+        }
+    }
+
+    @Test
+    public void ifSearchByCityCorrect() {
+        PageCriteria pageCriteria = new PageCriteria();
+        pageCriteria.setPageSize(100);
+        SortingCriteria sortingCriteria = new SortingCriteria();
+        SearchUserRequest searchUserRequest = new SearchUserRequest();
+        String searchingCity = "search";
+        searchUserRequest.setCity(searchingCity);
+
+        List<User> usersActual = userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
+        Assertions.assertNotEquals(0, usersActual.size());
+        for (User user : usersActual) {
+            Assertions.assertTrue(user.getCity().contains(searchingCity));
+        }
     }
 
 }

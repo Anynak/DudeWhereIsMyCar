@@ -35,8 +35,12 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
             }
         }
 
-        Predicate orPredicate = createPredicate(searchRequest, criteriaBuilder, root);
-        criteriaQuery.where(orPredicate);
+        List<Predicate> predicates = createPredicate(searchRequest, criteriaBuilder, root);
+
+        if (predicates.size() != 0) {
+            Predicate orPredicate = criteriaBuilder.or(predicates.toArray(new Predicate[0]));
+            criteriaQuery.where(orPredicate);
+        }
 
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         if (pageCriteria != null) {
@@ -48,7 +52,7 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
         return query.getResultList();
     }
 
-    private Predicate createPredicate(SearchUserRequest searchRequest, CriteriaBuilder criteriaBuilder, Root<User> root) {
+    private List<Predicate> createPredicate(SearchUserRequest searchRequest, CriteriaBuilder criteriaBuilder, Root<User> root) {
         List<Predicate> predicates = new ArrayList<>();
 
         if (searchRequest.getCountry() != null) {
@@ -62,6 +66,6 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
                     .like(root.get("city"), "%" + searchRequest.getCity() + "%");
             predicates.add(cityPredicate);
         }
-        return criteriaBuilder.or(predicates.toArray(new Predicate[0]));
+        return predicates;
     }
 }
