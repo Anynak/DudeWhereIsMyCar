@@ -1,38 +1,51 @@
 package com.innowise.DudeWhereIsMyCar.repository;
 
+import com.innowise.DudeWhereIsMyCar.controllers.AuthController;
 import com.innowise.DudeWhereIsMyCar.model.Role;
 import com.innowise.DudeWhereIsMyCar.model.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
+import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+//https://spring.io/guides/gs/testing-web/
+//https://www.youtube.com/watch?v=Lnc3o8cCwZY
 @SpringBootTest
 @Testcontainers
+@AutoConfigureMockMvc
 public class JpaTest {
-    @Container
-    public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:12");
-
-    @DynamicPropertySource
-    static void configurePgContainer(DynamicPropertyRegistry registry){
-        registry.add("spring.datasource.url", pgsql::getJdbcUrl);
-        registry.add("spring.datasource.username", pgsql::getUsername);
-        registry.add("spring.datasource.password", pgsql::getPassword);
-    }
+    @Autowired
+    private MockMvc mockMvc;
+    //@Container
+    //public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:12");
+//
+    //@DynamicPropertySource
+    //static void configurePgContainer(DynamicPropertyRegistry registry){
+    //    registry.add("spring.datasource.url", pgsql::getJdbcUrl);
+    //    registry.add("spring.datasource.username", pgsql::getUsername);
+    //    registry.add("spring.datasource.password", pgsql::getPassword);
+    //}
+    @Autowired
+    private AuthController authController;
     @Autowired
     private UserRepository userRepository;
-
+    @Test
+    public void contextLoads() throws Exception {
+        assertThat(authController).isNotNull();
+    }
     @Test
     public void saveUserTest() {
         User user = generateUsers(1).get(0);
