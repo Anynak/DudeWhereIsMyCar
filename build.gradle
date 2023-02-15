@@ -41,6 +41,10 @@ dependencies {
     implementation group: 'org.flywaydb', name: 'flyway-core', version: '9.14.1'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.1.1'
     testImplementation 'com.h2database:h2:2.1.214'
+    //testImplementation group: 'org.testcontainers', name: 'testcontainers', version: '1.17.6'
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
+    testImplementation group: 'org.testcontainers', name: 'postgresql', version: '1.17.6'
+
 
 
 
