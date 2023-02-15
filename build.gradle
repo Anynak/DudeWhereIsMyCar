@@ -44,6 +44,9 @@ dependencies {
     //testImplementation group: 'org.testcontainers', name: 'testcontainers', version: '1.17.6'
     testImplementation "org.testcontainers:junit-jupiter:1.17.6"
     testImplementation group: 'org.testcontainers', name: 'postgresql', version: '1.17.6'
+    // https://mvnrepository.com/artifact/org.springframework/spring-test
+    testImplementation 'org.springframework:spring-test:6.0.4'
+
 
 
 
