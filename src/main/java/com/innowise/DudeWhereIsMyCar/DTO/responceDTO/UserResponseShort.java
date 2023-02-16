@@ -1,8 +1,10 @@
 package com.innowise.DudeWhereIsMyCar.DTO.responceDTO;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserResponseShort {
     private String name;
     private String phone;
