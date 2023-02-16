@@ -1,7 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
 import com.innowise.DudeWhereIsMyCar.model.Announcement;
-
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

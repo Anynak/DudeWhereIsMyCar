@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.LoginDTO;
 import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AuthResponseDTO;
-import com.innowise.DudeWhereIsMyCar.controllers.AuthController;
-import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Testcontainers
 @AutoConfigureMockMvc
 @ContextConfiguration
-//@SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)})
+@SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)})
 public class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -50,6 +50,15 @@ public class AuthControllerTest {
     //    registry.add("spring.datasource.username", pgsql::getUsername);
     //    registry.add("spring.datasource.password", pgsql::getPassword);
     //}
+
+    private static String asJsonString(final Object obj) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Before
     public void setup() {
@@ -99,15 +108,6 @@ public class AuthControllerTest {
         Assertions.assertNotNull(responseDTO.getAccessToken());
         Assertions.assertNotNull(responseDTO.getTokenType());
 
-    }
-
-    private static String asJsonString(final Object obj) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private <T> T jsonStringToPojo(String jsonInString, Class<T> obj) {

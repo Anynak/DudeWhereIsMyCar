@@ -3,8 +3,7 @@ package com.innowise.DudeWhereIsMyCar;
 
 public class Utils {
 
-    public static String getRandStr(int n)
-    {
+    public static String getRandStr(int n) {
 
         // choose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -19,7 +18,7 @@ public class Utils {
             // generate a random number between
             // 0 to AlphaNumericString variable length
             int index
-                    = (int)(AlphaNumericString.length()
+                    = (int) (AlphaNumericString.length()
                     * Math.random());
 
             // add Character one by one in end of sb
