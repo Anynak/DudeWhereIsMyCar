@@ -2,8 +2,8 @@ package com.innowise.DudeWhereIsMyCar.service;
 
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
 import com.innowise.DudeWhereIsMyCar.model.Role;
@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
         newUser.setPasswordHash(passwordEncoder.encode(userRequest.getPassword()));
         return userRepository.save(newUser);
     }
-
 
 
     public List<User> searchUser(

@@ -14,17 +14,16 @@ import java.util.stream.Collectors;
 @Data
 public class UserDetailsImpl implements UserDetails {
 
+    private final String login;
+    private final String passwordHash;
+    private final Boolean isDeleted;
+    private final Collection<GrantedAuthority> authority;
     public UserDetailsImpl(User user) {
         this.login = user.getLogin();
         this.passwordHash = user.getPasswordHash();
         this.isDeleted = user.getIsDeleted();
         this.authority = mapRolesToAuthorities(user.getRoles());
     }
-
-    private final String login;
-    private final String passwordHash;
-    private final Boolean isDeleted;
-    private final Collection<GrantedAuthority> authority;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

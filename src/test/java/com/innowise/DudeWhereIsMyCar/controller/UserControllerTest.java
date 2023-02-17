@@ -11,11 +11,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,18 +31,19 @@ import static org.testcontainers.shaded.org.hamcrest.Matchers.hasSize;
 @Testcontainers
 @AutoConfigureMockMvc
 @ContextConfiguration
-@SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)})
+@SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(value = "classpath:clear-test-user-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)})
 public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
+    @Container
+    public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:15");
 
-    private static String asJsonString(final Object obj) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @DynamicPropertySource
+    static void configurePgContainer(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", pgsql::getJdbcUrl);
+        registry.add("spring.datasource.username", pgsql::getUsername);
+        registry.add("spring.datasource.password", pgsql::getPassword);
     }
 
     @Test
@@ -70,6 +75,15 @@ public class UserControllerTest {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(jsonInString, obj);
         } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String asJsonString(final Object obj) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(obj);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

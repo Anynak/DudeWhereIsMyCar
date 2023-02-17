@@ -1,0 +1,1 @@
+TRUNCATE dude_where_is_my_car.user_role, dude_where_is_my_car.users CASCADE;

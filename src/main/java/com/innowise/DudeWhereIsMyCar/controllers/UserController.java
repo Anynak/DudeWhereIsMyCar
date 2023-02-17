@@ -1,8 +1,8 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
 import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponseFull;
@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor

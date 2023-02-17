@@ -1,10 +1,10 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AuthResponseDTO;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.LoginDTO;
+import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AuthResponseDTO;
+import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
 import com.innowise.DudeWhereIsMyCar.model.User;
 import com.innowise.DudeWhereIsMyCar.scurity.JWTGenerator;
@@ -21,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+
 @CrossOrigin
 @RestController
 @Validated
@@ -34,7 +35,7 @@ public class AuthController {
 
     @PostMapping("/v1/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
-        if (principal != null) throw new AlreadyLoggedException("user "+principal.getName()+" is already logged");
+        if (principal != null) throw new AlreadyLoggedException("user " + principal.getName() + " is already logged");
 
         User user = userService.registerUser(userRequest);
         UserResponse response = userMapper.toUserResponse(user);

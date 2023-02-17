@@ -17,6 +17,4 @@ public interface VehicleModelMapper {
     List<VehicleModelResponse> toVehicleModelResponses(List<VehicleModel> vehicleModels);
 
 
-
-
 }

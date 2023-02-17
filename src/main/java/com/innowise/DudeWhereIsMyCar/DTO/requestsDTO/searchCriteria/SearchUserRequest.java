@@ -1,4 +1,5 @@
 package com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria;
+
 import lombok.Data;
 
 @Data

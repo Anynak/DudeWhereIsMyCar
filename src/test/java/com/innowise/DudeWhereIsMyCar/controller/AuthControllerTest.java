@@ -12,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,6 +21,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
@@ -35,21 +39,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Testcontainers
 @AutoConfigureMockMvc
 @ContextConfiguration
-@SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)})
+@SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(value = "classpath:clear-test-user-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)})
 public class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext context;
-    //@Container
-    //public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:12");
-////
-    //@DynamicPropertySource
-    //static void configurePgContainer(DynamicPropertyRegistry registry){
-    //    registry.add("spring.datasource.url", pgsql::getJdbcUrl);
-    //    registry.add("spring.datasource.username", pgsql::getUsername);
-    //    registry.add("spring.datasource.password", pgsql::getPassword);
-    //}
+    @Container
+    public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:15");
+    @DynamicPropertySource
+    static void configurePgContainer(DynamicPropertyRegistry registry){
+        registry.add("spring.datasource.url", pgsql::getJdbcUrl);
+        registry.add("spring.datasource.username", pgsql::getUsername);
+        registry.add("spring.datasource.password", pgsql::getPassword);
+    }
 
     private static String asJsonString(final Object obj) {
         try {

@@ -24,12 +24,10 @@ import java.util.Locale;
 public class GlobalExceptionHandler {
 
 
+    private final Locale loc = LocaleContextHolder.getLocale();
     @Autowired
     @Qualifier("validationErrors")
     private MessageSource messageSource;
-
-    private final Locale loc = LocaleContextHolder.getLocale();
-
 
     @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
     protected ResponseEntity<Object> handleBind(Exception ex) {
@@ -50,6 +48,7 @@ public class GlobalExceptionHandler {
         }
         return new ResponseEntity<>(apiErrors, httpStatus);
     }
+
     private ResponseEntity<Object> createResponse(Exception ex, String errorText, HttpStatus httpStatus) {
         ApiError apiError = new ApiError(httpStatus, ex.getMessage(), errorText);
         List<ApiError> errors = new ArrayList<>();

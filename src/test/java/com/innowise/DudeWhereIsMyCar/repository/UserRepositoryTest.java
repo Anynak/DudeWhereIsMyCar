@@ -51,7 +51,7 @@ public class UserRepositoryTest {
 
     @Test
     public void findByIdTest() {
-        Long testId = 777L;
+        Long testId = 10000L;
 
         Optional<User> optUser = userRepository.findById(testId);
 
