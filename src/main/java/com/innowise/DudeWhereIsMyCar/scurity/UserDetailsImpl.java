@@ -18,6 +18,7 @@ public class UserDetailsImpl implements UserDetails {
     private final String passwordHash;
     private final Boolean isDeleted;
     private final Collection<GrantedAuthority> authority;
+
     public UserDetailsImpl(User user) {
         this.login = user.getLogin();
         this.passwordHash = user.getPasswordHash();

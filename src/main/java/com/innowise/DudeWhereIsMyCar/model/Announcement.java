@@ -1,10 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -14,6 +11,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "announcement", schema = "dude_where_is_my_car")
 public class Announcement {
@@ -33,7 +31,6 @@ public class Announcement {
     private Float price;
 
     @Column(name = "comment")
-    @Lob
     private String comment;
 
     @Column(name = "is_deleted", nullable = false)

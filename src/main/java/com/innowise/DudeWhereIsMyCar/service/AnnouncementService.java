@@ -19,4 +19,6 @@ public interface AnnouncementService {
 
     Announcement deleteAnnouncement(Long id);
 
+    List<Announcement> convertAnnouncementPrice(List<Announcement> announcements, String from, String to);
+
 }

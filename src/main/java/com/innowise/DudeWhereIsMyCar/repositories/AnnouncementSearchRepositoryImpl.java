@@ -28,10 +28,12 @@ public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepos
 
         Root<Announcement> root = criteriaQuery.from(Announcement.class);
 
-        if (sortingCriteria.getASC()) {
-            criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
-        } else {
-            criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
+        if (sortingCriteria.getSortBy() != null) {
+            if (sortingCriteria.getASC()) {
+                criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
+            } else {
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
+            }
         }
 
         List<Predicate> predicates = new ArrayList<>();
@@ -41,10 +43,10 @@ public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepos
 
         Predicate priceRangePredicate = criteriaBuilder.between(root.get("price"), searchRequest.getPriceMin(), searchRequest.getPriceMax());
         predicates.add(priceRangePredicate);
-
+//
         Predicate mileageRangePredicate = criteriaBuilder.between(root.get("vehicle").get("mileage"), searchRequest.getMileageMin(), searchRequest.getMileageMax());
         predicates.add(mileageRangePredicate);
-
+//
         Predicate releaseYearRangePredicate = criteriaBuilder.between(root.get("vehicle").get("releaseYear"), searchRequest.getReleaseYearMin(), searchRequest.getReleaseYearMax());
         predicates.add(releaseYearRangePredicate);
 
@@ -52,12 +54,12 @@ public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepos
             Predicate colorPredicate = criteriaBuilder.like(root.get("vehicle").get("color"), "%" + searchRequest.getColor() + "%");
             predicates.add(colorPredicate);
         }
-
+//
         if (searchRequest.getVehicleBrandName() != null) {
             Predicate brandPredicate = criteriaBuilder.like(root.get("vehicle").get("vehicleModel").get("vehicleBrand").get("vehicleBrandName"), "%" + searchRequest.getVehicleBrandName() + "%");
             predicates.add(brandPredicate);
         }
-
+//
         if (searchRequest.getVehicleModelName() != null) {
             Predicate modelPredicate = criteriaBuilder.like(root.get("vehicle").get("vehicleModel").get("vehicleModelName"), "%" + searchRequest.getVehicleModelName() + "%");
             predicates.add(modelPredicate);

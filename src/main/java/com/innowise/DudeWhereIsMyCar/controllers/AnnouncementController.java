@@ -1,5 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
+import com.innowise.DudeWhereIsMyCar.Const.Const;
 import com.innowise.DudeWhereIsMyCar.DTO.mapers.AnnouncementMapper;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.AnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
@@ -11,6 +12,7 @@ import com.innowise.DudeWhereIsMyCar.model.User;
 import com.innowise.DudeWhereIsMyCar.service.AnnouncementService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,11 +45,15 @@ public class AnnouncementController {
 
     @GetMapping("/v1")
     public List<AnnouncementResponse> findAnnouncement(
+            @RequestParam(required = false) @Size(min = 3, max = 3) String currency,
             @Valid SearchAnnouncementRequest searchAnnouncementRequest,
             @Valid PageCriteria pageCriteria,
             @Valid SortingCriteria sortingCriteria) {
 
         List<Announcement> announcements = announcementService.searchAnnouncement(searchAnnouncementRequest, pageCriteria, sortingCriteria);
+        if (currency != null) {
+            announcements = announcementService.convertAnnouncementPrice(announcements, Const.defaultCurrency, currency);
+        }
         return announcementMapper.toAnnouncementResponse(announcements);
     }
 
