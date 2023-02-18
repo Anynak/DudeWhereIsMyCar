@@ -41,11 +41,14 @@ dependencies {
     implementation group: 'org.flywaydb', name: 'flyway-core', version: '9.14.1'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.1.1'
     testImplementation 'com.h2database:h2:2.1.214'
-    //testImplementation group: 'org.testcontainers', name: 'testcontainers', version: '1.17.6'
+
     testImplementation "org.testcontainers:junit-jupiter:1.17.6"
     testImplementation group: 'org.testcontainers', name: 'postgresql', version: '1.17.6'
-    // https://mvnrepository.com/artifact/org.springframework/spring-test
+
     testImplementation 'org.springframework:spring-test:6.0.4'
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '4.0.1'
+
 
 
 
