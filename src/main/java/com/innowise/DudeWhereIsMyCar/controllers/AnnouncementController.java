@@ -51,10 +51,11 @@ public class AnnouncementController {
             @Valid SortingCriteria sortingCriteria) {
 
         List<Announcement> announcements = announcementService.searchAnnouncement(searchAnnouncementRequest, pageCriteria, sortingCriteria);
+        List<AnnouncementResponse> responses = announcementMapper.toAnnouncementResponse(announcements);
         if (currency != null) {
-            announcements = announcementService.convertAnnouncementPrice(announcements, Const.defaultCurrency, currency);
+            responses = announcementService.convertAnnouncementPrice(responses, Const.defaultCurrency, currency);
         }
-        return announcementMapper.toAnnouncementResponse(announcements);
+        return responses;
     }
 
     @DeleteMapping("/v1/{id}")

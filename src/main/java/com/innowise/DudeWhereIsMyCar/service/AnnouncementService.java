@@ -3,6 +3,7 @@ package com.innowise.DudeWhereIsMyCar.service;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchAnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.model.Announcement;
 
 import java.util.List;
@@ -19,6 +20,6 @@ public interface AnnouncementService {
 
     Announcement deleteAnnouncement(Long id);
 
-    List<Announcement> convertAnnouncementPrice(List<Announcement> announcements, String from, String to);
+    List<AnnouncementResponse> convertAnnouncementPrice(List<AnnouncementResponse> announcements, String from, String to);
 
 }

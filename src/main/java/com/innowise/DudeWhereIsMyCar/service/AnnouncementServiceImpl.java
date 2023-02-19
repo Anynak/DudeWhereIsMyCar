@@ -3,6 +3,7 @@ package com.innowise.DudeWhereIsMyCar.service;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchAnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.clients.CurrencyClient;
 import com.innowise.DudeWhereIsMyCar.clients.DTO.CurrencyRate;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
@@ -44,15 +45,16 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public List<Announcement> convertAnnouncementPrice(List<Announcement> announcements, String from, String to) {
+    public List<AnnouncementResponse> convertAnnouncementPrice(List<AnnouncementResponse> announcements, String from, String to) {
         CurrencyRate currencyRate = currencyClient.getCurrencyRate(from, to);
         return announcements.stream()
-                .map(a -> new Announcement(
+                .map(a -> new AnnouncementResponse(
                         a.getAnnouncementId(),
-                        a.getVehicle(), a.getUser(),
+                        a.getVehicle(),
                         a.getPrice() * currencyRate.result,
-                        a.getComment(),
-                        a.getIsDeleted())).toList();
+                        to,
+                        a.getComment()))
+                .toList();
 
     }
 
