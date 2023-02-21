@@ -48,6 +48,8 @@ dependencies {
     testImplementation 'org.springframework:spring-test:6.0.4'
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '4.0.1'
+    compile 'org.springframework.kafka:spring-kafka:3.0.3'
+
 
 
 
