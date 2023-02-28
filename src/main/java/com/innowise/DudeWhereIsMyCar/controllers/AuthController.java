@@ -9,6 +9,7 @@ import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
+import com.innowise.DudeWhereIsMyCar.service.messageBroker.KafkaProducer;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,11 +33,13 @@ public class AuthController {
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final JWTGenerator jwtGenerator;
+    private final KafkaProducer kafkaProducer;
 
     @PostMapping("/v1/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
         if (principal != null) throw new AlreadyLoggedException("user " + principal.getName() + " is already logged");
 
+        kafkaProducer.sendMessageToTopic(userRequest.toString());
         User user = userService.registerUser(userRequest);
         UserResponse response = userMapper.toUserResponse(user);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
