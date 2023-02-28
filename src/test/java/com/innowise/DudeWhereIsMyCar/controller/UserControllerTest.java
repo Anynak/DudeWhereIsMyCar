@@ -2,9 +2,9 @@ package com.innowise.DudeWhereIsMyCar.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.LoginDTO;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AuthResponseDTO;
+import com.innowise.DudeWhereIsMyCar.dto.requests.LoginDTO;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.responses.AuthResponseDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

@@ -1,6 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.repositories;
 
-import com.innowise.DudeWhereIsMyCar.model.Role;
+import com.innowise.DudeWhereIsMyCar.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

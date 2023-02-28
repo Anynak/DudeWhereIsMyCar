@@ -1,12 +1,12 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
-import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponseFull;
-import com.innowise.DudeWhereIsMyCar.model.User;
+import com.innowise.DudeWhereIsMyCar.dto.mapers.UserMapper;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
+import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponseFull;
+import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

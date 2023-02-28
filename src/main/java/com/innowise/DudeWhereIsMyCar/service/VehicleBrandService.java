@@ -1,6 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
-import com.innowise.DudeWhereIsMyCar.model.VehicleBrand;
+import com.innowise.DudeWhereIsMyCar.models.VehicleBrand;
 
 import java.util.List;
 

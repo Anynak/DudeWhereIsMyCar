@@ -1,14 +1,14 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
-import com.innowise.DudeWhereIsMyCar.Const.Const;
-import com.innowise.DudeWhereIsMyCar.DTO.mapers.AnnouncementMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.AnnouncementRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchAnnouncementRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AnnouncementResponse;
-import com.innowise.DudeWhereIsMyCar.model.Announcement;
-import com.innowise.DudeWhereIsMyCar.model.User;
+import com.innowise.DudeWhereIsMyCar.configs.consts.Const;
+import com.innowise.DudeWhereIsMyCar.dto.mapers.AnnouncementMapper;
+import com.innowise.DudeWhereIsMyCar.dto.requests.AnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchAnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.responses.AnnouncementResponse;
+import com.innowise.DudeWhereIsMyCar.models.Announcement;
+import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.AnnouncementService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;

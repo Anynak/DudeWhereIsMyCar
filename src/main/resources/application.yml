@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/dudeWhereIsMyCar
+    password: '1111'
+  web:
+    locale: en_US
+  security:
+    user:
+      name: user
+      password: '1111'
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    show-sql: 'true'
+server:
+  servlet:
+    contextPath: /api
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE

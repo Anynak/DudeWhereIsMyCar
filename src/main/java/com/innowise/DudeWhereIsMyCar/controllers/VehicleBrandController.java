@@ -1,11 +1,11 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
-import com.innowise.DudeWhereIsMyCar.DTO.mapers.VehicleBrandMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.VehicleBrandRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.VehicleBrandResponse;
-import com.innowise.DudeWhereIsMyCar.model.VehicleBrand;
+import com.innowise.DudeWhereIsMyCar.controllers.validators.ValidList;
+import com.innowise.DudeWhereIsMyCar.dto.mapers.VehicleBrandMapper;
+import com.innowise.DudeWhereIsMyCar.dto.requests.VehicleBrandRequest;
+import com.innowise.DudeWhereIsMyCar.dto.responses.VehicleBrandResponse;
+import com.innowise.DudeWhereIsMyCar.models.VehicleBrand;
 import com.innowise.DudeWhereIsMyCar.service.VehicleBrandService;
-import com.innowise.DudeWhereIsMyCar.validators.ValidList;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.repository;
 
-import com.innowise.DudeWhereIsMyCar.model.Role;
-import com.innowise.DudeWhereIsMyCar.model.User;
+import com.innowise.DudeWhereIsMyCar.models.Role;
+import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

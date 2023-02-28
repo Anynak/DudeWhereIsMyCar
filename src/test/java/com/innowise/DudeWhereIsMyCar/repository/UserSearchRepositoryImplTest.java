@@ -1,10 +1,10 @@
 package com.innowise.DudeWhereIsMyCar.repository;
 
-import com.innowise.DudeWhereIsMyCar.Const.Const;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchUserRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
-import com.innowise.DudeWhereIsMyCar.model.User;
+import com.innowise.DudeWhereIsMyCar.configs.consts.Const;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

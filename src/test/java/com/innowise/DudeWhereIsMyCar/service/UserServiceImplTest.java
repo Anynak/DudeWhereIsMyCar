@@ -1,10 +1,13 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
-import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
-import com.innowise.DudeWhereIsMyCar.model.Role;
-import com.innowise.DudeWhereIsMyCar.model.User;
+import com.innowise.DudeWhereIsMyCar.dto.mapers.UserMapper;
+import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.models.Role;
+import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
+import com.innowise.DudeWhereIsMyCar.service.impl.BeforeRegisterUserChecker;
+import com.innowise.DudeWhereIsMyCar.service.impl.RoleServiceImpl;
+import com.innowise.DudeWhereIsMyCar.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,10 +1,10 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.PageCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SearchAnnouncementRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.searchCriteria.SortingCriteria;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AnnouncementResponse;
-import com.innowise.DudeWhereIsMyCar.model.Announcement;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchAnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.responses.AnnouncementResponse;
+import com.innowise.DudeWhereIsMyCar.models.Announcement;
 
 import java.util.List;
 

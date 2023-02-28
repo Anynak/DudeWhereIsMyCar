@@ -1,10 +1,11 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.exceptions.EmailAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.PhoneNumberAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.UserAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
+import com.innowise.DudeWhereIsMyCar.service.impl.BeforeRegisterUserChecker;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

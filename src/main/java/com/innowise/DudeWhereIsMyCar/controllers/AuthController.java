@@ -1,13 +1,13 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
-import com.innowise.DudeWhereIsMyCar.DTO.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.LoginDTO;
-import com.innowise.DudeWhereIsMyCar.DTO.requestsDTO.RegisterUserRequest;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.AuthResponseDTO;
-import com.innowise.DudeWhereIsMyCar.DTO.responceDTO.UserResponse;
+import com.innowise.DudeWhereIsMyCar.configs.scurity.JWTGenerator;
+import com.innowise.DudeWhereIsMyCar.dto.mapers.UserMapper;
+import com.innowise.DudeWhereIsMyCar.dto.requests.LoginDTO;
+import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.responses.AuthResponseDTO;
+import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
-import com.innowise.DudeWhereIsMyCar.model.User;
-import com.innowise.DudeWhereIsMyCar.scurity.JWTGenerator;
+import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
