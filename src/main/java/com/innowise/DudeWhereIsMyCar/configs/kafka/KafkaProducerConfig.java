@@ -14,14 +14,13 @@ import java.util.Map;
 
 @Configuration
 public class KafkaProducerConfig {
-    @Value(value = "broker:29092")
-    private String bootstrapAddress;
+
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                bootstrapAddress);
+                "broker:29092");
         configProps.put(
                 ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);

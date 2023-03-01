@@ -38,8 +38,6 @@ public class AuthController {
     @PostMapping("/v1/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
         if (principal != null) throw new AlreadyLoggedException("user " + principal.getName() + " is already logged");
-
-        kafkaProducer.sendMessageToTopic(userRequest.toString());
         User user = userService.registerUser(userRequest);
         UserResponse response = userMapper.toUserResponse(user);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -54,6 +52,7 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtGenerator.generateToken(authentication);
+        kafkaProducer.sendMessageToTopic(loginDTO.getLogin());
         return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
     }
 
