@@ -1,13 +1,18 @@
 package com.innowise.DudeWhereIsMyCar.configs.kafka;
 
+import com.innowise.DudeWhereIsMyCar.dto.requests.LoginDTO;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,22 +21,25 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
     @Bean
-    public ConsumerFactory<String,String> consumerFactory(){
+    public ConsumerFactory<String,LoginDTO> consumerFactory(){
         Map<String,Object> configMap = new HashMap<>();
         //Kafka is accessible at localhost:9092 on our host machine
         configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"broker:29092");
         //group_id is needed in the @KafkaListener
         configMap.put(ConsumerConfig.GROUP_ID_CONFIG,"group_id");
         configMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        configMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        configMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        //configMap.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
+        configMap.put(JsonDeserializer.VALUE_DEFAULT_TYPE, LoginDTO.class);
         return new DefaultKafkaConsumerFactory<>(configMap);
+        //return new DefaultKafkaConsumerFactory<>(configMap);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String>
+    public ConcurrentKafkaListenerContainerFactory<String, LoginDTO>
     kafkaListenerContainerFactory() {
 
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+        ConcurrentKafkaListenerContainerFactory<String, LoginDTO> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;

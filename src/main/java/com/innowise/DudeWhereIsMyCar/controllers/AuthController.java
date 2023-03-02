@@ -52,7 +52,7 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtGenerator.generateToken(authentication);
-        kafkaProducer.sendMessageToTopic(loginDTO.getLogin());
+        kafkaProducer.sendMessageToTopic(loginDTO);
         return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
     }
 

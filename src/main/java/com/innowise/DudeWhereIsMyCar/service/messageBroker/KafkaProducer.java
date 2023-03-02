@@ -1,5 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.service.messageBroker;
 
+import com.innowise.DudeWhereIsMyCar.dto.requests.LoginDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class KafkaProducer {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, LoginDTO> kafkaTemplate;
 
-    public void sendMessageToTopic(String message) {
-        kafkaTemplate.send("myTopic", message);
+    public void sendMessageToTopic(LoginDTO loginDTO) {
+        kafkaTemplate.send("topic", loginDTO);
     }
 }
