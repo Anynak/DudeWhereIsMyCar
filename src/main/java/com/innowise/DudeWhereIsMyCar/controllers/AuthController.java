@@ -9,7 +9,7 @@ import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
-import com.innowise.DudeWhereIsMyCar.service.messageBroker.KafkaProducer;
+import com.innowise.DudeWhereIsMyCar.service.messageBroker.currentService.CurrentProducer;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,7 +33,7 @@ public class AuthController {
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final JWTGenerator jwtGenerator;
-    private final KafkaProducer kafkaProducer;
+    private final CurrentProducer kafkaProducer;
 
     @PostMapping("/v1/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
@@ -52,7 +52,6 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtGenerator.generateToken(authentication);
-        kafkaProducer.sendMessageToTopic(loginDTO);
         return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
     }
 
