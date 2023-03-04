@@ -1,12 +1,12 @@
 package com.innowise.DudeWhereIsMyCar.service.impl;
 
-import com.innowise.DudeWhereIsMyCar.controllers.clients.CurrencyClient;
-import com.innowise.DudeWhereIsMyCar.controllers.clients.dto.CurrencyRate;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchAnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.responses.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
+import com.innowise.DudeWhereIsMyCar.external.feign.CurrencyClient;
+import com.innowise.DudeWhereIsMyCar.external.feign.dto.CurrencyRate;
 import com.innowise.DudeWhereIsMyCar.models.Announcement;
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementRepository;
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementSearchRepository;

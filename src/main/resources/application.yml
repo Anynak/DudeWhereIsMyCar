@@ -17,7 +17,9 @@ spring:
 
   kafka:
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: broker:29092
+    consumer:
+      bootstrap-servers: broker:29092
 
 
 server:

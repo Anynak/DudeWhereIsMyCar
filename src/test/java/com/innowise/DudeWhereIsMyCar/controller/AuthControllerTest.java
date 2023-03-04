@@ -42,14 +42,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "classpath:clear-test-user-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)})
 public class AuthControllerTest {
+    @Container
+    public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:15");
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext context;
-    @Container
-    public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:15");
+
     @DynamicPropertySource
-    static void configurePgContainer(DynamicPropertyRegistry registry){
+    static void configurePgContainer(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", pgsql::getJdbcUrl);
         registry.add("spring.datasource.username", pgsql::getUsername);
         registry.add("spring.datasource.password", pgsql::getPassword);

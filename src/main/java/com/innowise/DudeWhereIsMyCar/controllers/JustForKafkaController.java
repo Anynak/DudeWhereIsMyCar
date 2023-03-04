@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.controllers;
 
-import com.innowise.DudeWhereIsMyCar.dto.messageBrocker.SumTask;
-import com.innowise.DudeWhereIsMyCar.service.messageBroker.currentService.CurrentProducer;
+import com.innowise.DudeWhereIsMyCar.external.messagebrockers.dto.SumTask;
+import com.innowise.DudeWhereIsMyCar.external.messagebrockers.kafka.current.service.CurrentProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

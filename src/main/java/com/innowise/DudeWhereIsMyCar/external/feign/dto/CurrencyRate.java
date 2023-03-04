@@ -1,4 +1,4 @@
-package com.innowise.DudeWhereIsMyCar.controllers.clients.dto;
+package com.innowise.DudeWhereIsMyCar.external.feign.dto;
 
 import lombok.Data;
 

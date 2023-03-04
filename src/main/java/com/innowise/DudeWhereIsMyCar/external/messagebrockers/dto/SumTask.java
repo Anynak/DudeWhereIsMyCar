@@ -1,4 +1,4 @@
-package com.innowise.DudeWhereIsMyCar.dto.messageBrocker;
+package com.innowise.DudeWhereIsMyCar.external.messagebrockers.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

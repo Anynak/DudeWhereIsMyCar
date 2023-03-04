@@ -1,6 +1,7 @@
-package com.innowise.DudeWhereIsMyCar.service.messageBroker.adderService;
+package com.innowise.DudeWhereIsMyCar.external.messagebrockers.kafka.adder.listeners;
 
-import com.innowise.DudeWhereIsMyCar.dto.messageBrocker.SumTask;
+import com.innowise.DudeWhereIsMyCar.external.messagebrockers.dto.SumTask;
+import com.innowise.DudeWhereIsMyCar.external.messagebrockers.kafka.adder.service.AdderProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,9 @@ public class AdderConsumer {
 
     private final AdderProducer adderProducer;
 
-    @KafkaListener(topics = "in", groupId = "adder_1")
+    @KafkaListener(topics = "in", groupId = "adder_1", containerFactory = "currentKafkaListenerContainerFactory")
     public void listenToKafkaTopic(SumTask sumTask) {
         sumTask.setSum(sumTask.getN1() + sumTask.getN2());
-        adderProducer.sendMessageToTopic(sumTask);
+        adderProducer.sendMessageToTopic(sumTask.getN1() + sumTask.getN2());
     }
 }

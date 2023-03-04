@@ -34,16 +34,25 @@ import static org.testcontainers.shaded.org.hamcrest.Matchers.hasSize;
 @SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "classpath:clear-test-user-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)})
 public class UserControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
     @Container
     public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:15");
+    @Autowired
+    private MockMvc mockMvc;
 
     @DynamicPropertySource
     static void configurePgContainer(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", pgsql::getJdbcUrl);
         registry.add("spring.datasource.username", pgsql::getUsername);
         registry.add("spring.datasource.password", pgsql::getPassword);
+    }
+
+    private static String asJsonString(final Object obj) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -75,15 +84,6 @@ public class UserControllerTest {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(jsonInString, obj);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static String asJsonString(final Object obj) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.writeValueAsString(obj);
-        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

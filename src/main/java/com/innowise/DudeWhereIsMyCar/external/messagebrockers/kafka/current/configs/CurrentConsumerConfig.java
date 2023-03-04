@@ -1,8 +1,9 @@
-package com.innowise.DudeWhereIsMyCar.configs.kafka;
+package com.innowise.DudeWhereIsMyCar.external.messagebrockers.kafka.current.configs;
 
-import com.innowise.DudeWhereIsMyCar.dto.messageBrocker.SumTask;
+import com.innowise.DudeWhereIsMyCar.external.messagebrockers.dto.SumTask;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -16,25 +17,23 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaConsumerConfig {
-    @Bean
+public class CurrentConsumerConfig {
+    @Value("${spring.kafka.consumer.bootstrap-servers}")
+    private String brokerServer;
+
     public ConsumerFactory<String, SumTask> consumerFactory() {
         Map<String, Object> configMap = new HashMap<>();
-        //Kafka is accessible at localhost:9092 on our host machine
-        configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "broker:29092");
-        //group_id is needed in the @KafkaListener
+        configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, brokerServer);
         configMap.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         configMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configMap.put(JsonDeserializer.VALUE_DEFAULT_TYPE, SumTask.class);
         return new DefaultKafkaConsumerFactory<>(configMap);
-        //return new DefaultKafkaConsumerFactory<>(configMap);
     }
 
-    @Bean
+    @Bean("currentKafkaListenerContainerFactory")
     public ConcurrentKafkaListenerContainerFactory<String, SumTask>
-    kafkaListenerContainerFactory() {
-
+    currentKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, SumTask> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
