@@ -24,9 +24,6 @@ public class VehicleRequest {
     private String color;
 
     @NotNull
-    private VehicleTypeRequest vehicleType;
-
-    @NotNull
     private VehicleModelRequest vehicleModel;
 
 }

@@ -10,6 +10,5 @@ public class VehicleResponse {
     private Integer mileage;
     private Integer releaseYear;
     private String color;
-    private VehicleTypeResponse vehicleType;
     private VehicleModelResponse vehicleModel;
 }

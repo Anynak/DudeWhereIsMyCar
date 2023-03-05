@@ -42,7 +42,6 @@ create table dude_where_is_my_car.vehicle
     mileage                        integer     not null,
     release_year                   integer     not null,
     vehicle_model_vehicle_model_id bigint      not null,
-    vehicle_type_vehicle_type_id   bigint      not null,
     primary key (vehicle_id)
 );
 create table dude_where_is_my_car.vehicle_brand
@@ -57,12 +56,6 @@ create table dude_where_is_my_car.vehicle_model
     vehicle_model_name             varchar(255) not null,
     vehicle_brand_vehicle_brand_id bigint       not null,
     primary key (vehicle_model_id)
-);
-create table dude_where_is_my_car.vehicle_type
-(
-    vehicle_type_id bigserial    not null,
-    type_name       varchar(255) not null unique,
-    primary key (vehicle_type_id)
 );
 
 
@@ -91,11 +84,6 @@ alter table dude_where_is_my_car.vehicle
     add constraint FK_vehicle_model
         foreign key (vehicle_model_vehicle_model_id)
             references dude_where_is_my_car.vehicle_model (vehicle_model_id);
-
-alter table dude_where_is_my_car.vehicle
-    add constraint FK_vehicle_type
-        foreign key (vehicle_type_vehicle_type_id)
-            references dude_where_is_my_car.vehicle_type (vehicle_type_id);
 
 alter table dude_where_is_my_car.vehicle_model
     add constraint FK_vehicle_brand

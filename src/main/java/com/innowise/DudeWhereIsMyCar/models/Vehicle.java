@@ -32,10 +32,6 @@ public class Vehicle {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
-    private VehicleType vehicleType;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false)
     private VehicleModel vehicleModel;
 
     @Override

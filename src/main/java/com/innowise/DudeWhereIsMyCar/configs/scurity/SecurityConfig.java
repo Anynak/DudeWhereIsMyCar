@@ -29,13 +29,12 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml"
+                        "/auth/**", "/api/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml"
                         //, "/**"
                 )
                 .permitAll()
                 .requestMatchers(
-                        "/vehicleTypes"
-                        , "/vehicleBrands"
+                        "/vehicleBrands"
                         , "/vehicleModels"
                         , "/users/**"
                 ).hasAuthority("ADMIN")

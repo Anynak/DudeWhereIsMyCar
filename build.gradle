@@ -31,6 +31,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security:${springBootStarterVersion}"
     testImplementation "org.springframework.security:spring-security-test:${springSecurityTestVersion}"
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiStarterWebmvcVersion}"
+
     implementation "io.jsonwebtoken:jjwt-api:${jsonwebtokenVersion}"
     runtimeOnly "io.jsonwebtoken:jjwt-impl:${jsonwebtokenVersion}"
     runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jsonwebtokenVersion}"
