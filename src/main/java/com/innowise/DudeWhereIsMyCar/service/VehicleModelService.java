@@ -10,4 +10,6 @@ public interface VehicleModelService {
     List<VehicleModel> addVehicleModels(List<VehicleModel> vehicleModels);
 
     void removeVehicleModelById(Long vehicleModelId);
+
+    List<VehicleModel> getVehicleModelsByBrand(Long brandId);
 }

@@ -38,9 +38,14 @@ public class VehicleModelController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/v1")
+    @GetMapping("/v1/all")
     public List<VehicleModelResponse> getVehicleModels() {
         return vehicleModelMapper.toVehicleModelResponses(vehicleModelService.getAllVehicleModels());
+    }
+
+    @GetMapping("/v1")
+    public List<VehicleModelResponse> getVehicleModelsByBrand(@RequestParam(name = "brandId") Long brandId) {
+        return vehicleModelMapper.toVehicleModelResponses(vehicleModelService.getVehicleModelsByBrand(brandId));
     }
 
 
