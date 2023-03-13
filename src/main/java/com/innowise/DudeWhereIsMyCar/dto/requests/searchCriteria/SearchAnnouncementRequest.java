@@ -14,7 +14,6 @@ public class SearchAnnouncementRequest {
     private Integer releaseYearMin = Const.MIN_RELEASE_YEAR;
     private Integer releaseYearMax = Const.getMaxReleaseYear();
     private String color;
-    private String vehicleTypeName;
     private String vehicleBrandName;
     private String vehicleModelName;
 

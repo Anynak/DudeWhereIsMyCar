@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface VehicleModelRepository extends JpaRepository<VehicleModel, Long> {
     List<VehicleModel> findAllByVehicleBrand(VehicleBrand vehicleBrand);
+
 }

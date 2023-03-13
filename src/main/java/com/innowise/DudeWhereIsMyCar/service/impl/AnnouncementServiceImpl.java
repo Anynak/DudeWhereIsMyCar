@@ -47,7 +47,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public List<AnnouncementResponse> convertAnnouncementPrice(List<AnnouncementResponse> announcements, String from, String to) {
-        CurrencyRate currencyRate = currencyClient.getCurrencyRate(from, to);
+        CurrencyRate currencyRate = currencyClient.getCurrencyRate(from.toUpperCase(), to.toUpperCase());
         return announcements.stream()
                 .map(a -> new AnnouncementResponse(
                         a.getAnnouncementId(),
@@ -56,8 +56,5 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                         to,
                         a.getComment()))
                 .toList();
-
     }
-
-
 }
