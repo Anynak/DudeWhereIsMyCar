@@ -65,10 +65,6 @@ public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepos
             predicates.add(modelPredicate);
         }
 
-        if (searchRequest.getVehicleTypeName() != null) {
-            Predicate modelPredicate = criteriaBuilder.like(root.get("vehicle").get("vehicleType").get("typeName"), "%" + searchRequest.getVehicleTypeName() + "%");
-            predicates.add(modelPredicate);
-        }
 
         Predicate andPredicate = criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 
