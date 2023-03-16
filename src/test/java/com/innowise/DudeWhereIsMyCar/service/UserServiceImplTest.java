@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.service;
 
 import com.innowise.DudeWhereIsMyCar.dto.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.models.Role;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;

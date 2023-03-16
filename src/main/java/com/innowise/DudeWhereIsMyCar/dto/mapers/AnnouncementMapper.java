@@ -1,6 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.dto.mapers;
 
-import com.innowise.DudeWhereIsMyCar.dto.requests.AnnouncementRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.AnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.dto.responses.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.models.Announcement;
 import org.mapstruct.Mapper;
@@ -18,6 +18,7 @@ public interface AnnouncementMapper {
 
 
     List<AnnouncementResponse> toAnnouncementResponse(List<Announcement> announcementRequest);
+
     @Mapping(target = "currency", ignore = true)
     AnnouncementResponse toAnnouncementResponse(Announcement announcement);
 

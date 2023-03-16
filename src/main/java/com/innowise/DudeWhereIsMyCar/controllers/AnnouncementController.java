@@ -2,10 +2,10 @@ package com.innowise.DudeWhereIsMyCar.controllers;
 
 import com.innowise.DudeWhereIsMyCar.configs.consts.Const;
 import com.innowise.DudeWhereIsMyCar.dto.mapers.AnnouncementMapper;
-import com.innowise.DudeWhereIsMyCar.dto.requests.AnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchAnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.AnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.dto.responses.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.models.Announcement;
 import com.innowise.DudeWhereIsMyCar.models.User;

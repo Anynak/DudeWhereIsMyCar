@@ -1,8 +1,7 @@
-package com.innowise.DudeWhereIsMyCar.dto.requests;
+package com.innowise.DudeWhereIsMyCar.dto.requests.userRequests;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

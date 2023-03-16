@@ -2,13 +2,11 @@ package com.innowise.DudeWhereIsMyCar.controllers;
 
 import com.innowise.DudeWhereIsMyCar.configs.scurity.JWTGenerator;
 import com.innowise.DudeWhereIsMyCar.dto.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.dto.requests.LoginDTO;
-import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.LoginDTO;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.dto.responses.AuthResponseDTO;
 import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
-import com.innowise.DudeWhereIsMyCar.external.messagebrockers.kafka.current.service.CurrentProducer;
-import com.innowise.DudeWhereIsMyCar.models.Role;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;

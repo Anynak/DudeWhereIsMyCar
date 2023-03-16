@@ -1,7 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.service.impl;
 
 
-import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.exceptions.EmailAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.PhoneNumberAlreadyExistsException;
 import com.innowise.DudeWhereIsMyCar.exceptions.UserAlreadyExistsException;

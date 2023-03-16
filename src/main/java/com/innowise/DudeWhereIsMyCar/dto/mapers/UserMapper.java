@@ -1,6 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.dto.mapers;
 
-import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
 import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponseFull;
 import com.innowise.DudeWhereIsMyCar.models.User;

@@ -1,4 +1,4 @@
-package com.innowise.DudeWhereIsMyCar.dto.requests;
+package com.innowise.DudeWhereIsMyCar.dto.requests.userRequests;
 
 import com.innowise.DudeWhereIsMyCar.controllers.validators.PasswordMatch;
 import jakarta.validation.constraints.Email;

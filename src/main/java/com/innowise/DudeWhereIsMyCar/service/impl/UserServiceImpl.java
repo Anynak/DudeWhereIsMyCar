@@ -1,10 +1,10 @@
 package com.innowise.DudeWhereIsMyCar.service.impl;
 
 import com.innowise.DudeWhereIsMyCar.dto.mapers.UserMapper;
-import com.innowise.DudeWhereIsMyCar.dto.requests.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.RegisterUserRequest;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
 import com.innowise.DudeWhereIsMyCar.models.Role;
 import com.innowise.DudeWhereIsMyCar.models.User;

@@ -2,7 +2,7 @@ package com.innowise.DudeWhereIsMyCar.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.innowise.DudeWhereIsMyCar.dto.requests.LoginDTO;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.LoginDTO;
 import com.innowise.DudeWhereIsMyCar.dto.responses.AuthResponseDTO;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;

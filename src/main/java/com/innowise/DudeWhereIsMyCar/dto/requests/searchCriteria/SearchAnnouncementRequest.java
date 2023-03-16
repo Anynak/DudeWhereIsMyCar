@@ -12,7 +12,7 @@ public class SearchAnnouncementRequest {
     private Integer mileageMin = Const.MIN_MILEAGE;
     private Integer mileageMax = Const.MAX_MILEAGE;
     private Integer releaseYearMin = Const.MIN_RELEASE_YEAR;
-    private Integer releaseYearMax = Const.getMaxReleaseYear();
+    private Integer releaseYearMax = Const.MAX_RELEASE_YEAR;
     private String color;
     private String vehicleBrandName;
     private String vehicleModelName;
