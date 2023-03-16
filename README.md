@@ -5,4 +5,4 @@
 -------------------------
 [Swagger](http://localhost:8080/api/swagger-ui.html) is available. <br />
 For [pgAdmin](http://localhost:5050/browser/) use email: toha@gmail.com and password: 1111 <br /><br />
-Repository for [Frontend](https://github.com/Anynak/GWTApp) 
+[Frontend](https://github.com/Anynak/GWTApp) repository
