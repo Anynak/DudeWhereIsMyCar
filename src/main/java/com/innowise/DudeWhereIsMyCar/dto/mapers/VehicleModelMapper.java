@@ -12,9 +12,10 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface VehicleModelMapper {
 
-    @Mapping(target = "vehicleModelName", ignore = true)
-    List<VehicleModel> toVehicleModels(List<VehicleModelRequest> vehicleBrandsRequest);
 
+    List<VehicleModel> toVehicleModels(List<VehicleModelRequest> vehicleBrandsRequest);
+    @Mapping(target = "vehicleModelName", ignore = true)
+    VehicleModel toVehicleModel(VehicleModelRequest vehicleBrandsRequest);
     List<VehicleModelResponse> toVehicleModelResponses(List<VehicleModel> vehicleModels);
 
 
