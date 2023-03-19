@@ -18,6 +18,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -43,6 +44,10 @@ dependencies {
     testImplementation "org.springframework:spring-test:${springTestVersion}"
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign:${openfeignVersion}"
     implementation "org.springframework.kafka:spring-kafka:${springKafkaVersion}"
+    implementation 'org.springframework:spring-websocket:6.0.6'
+    implementation 'org.springframework:spring-messaging:6.0.6'
+
+
 }
 
 //tasks.named('test') {

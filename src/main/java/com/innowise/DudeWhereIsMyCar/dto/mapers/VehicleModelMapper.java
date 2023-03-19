@@ -1,6 +1,7 @@
 package com.innowise.DudeWhereIsMyCar.dto.mapers;
 
 import com.innowise.DudeWhereIsMyCar.dto.requests.VehicleModelRequest;
+import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.VehicleModelUserRequest;
 import com.innowise.DudeWhereIsMyCar.dto.responses.VehicleModelResponse;
 import com.innowise.DudeWhereIsMyCar.models.VehicleModel;
 import org.mapstruct.Mapper;
@@ -14,8 +15,12 @@ public interface VehicleModelMapper {
 
 
     List<VehicleModel> toVehicleModels(List<VehicleModelRequest> vehicleBrandsRequest);
-    @Mapping(target = "vehicleModelName", ignore = true)
+
     VehicleModel toVehicleModel(VehicleModelRequest vehicleBrandsRequest);
+
+    @Mapping(target = "vehicleModelName", ignore = true)
+    VehicleModel toVehicleModel(VehicleModelUserRequest vehicleBrandsRequest);
+
     List<VehicleModelResponse> toVehicleModelResponses(List<VehicleModel> vehicleModels);
 
 
