@@ -9,8 +9,12 @@ import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,11 +38,13 @@ public class AuthController {
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final JWTGenerator jwtGenerator;
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/v1/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
         if (principal != null) throw new AlreadyLoggedException("user " + principal.getName() + " is already logged");
         User user = userService.registerUser(userRequest);
+        logger.info("new user was created. userId = {}, login = {}", user.getUserId(), user.getLogin());
         UserResponse response = userMapper.toUserResponse(user);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

@@ -13,6 +13,9 @@ import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepository;
 import com.innowise.DudeWhereIsMyCar.service.RoleService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,6 +35,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserSearchRepository userSearchRepository;
     private final BeforeRegisterUserChecker beforeRegisterUserChecker;
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public User findUserBuLogin(String login) {
@@ -48,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(RegisterUserRequest userRequest) {
+        logger.info("attempt to create new user. login =  {}", userRequest.getLogin());
         beforeRegisterUserChecker.check(userRequest);
         User newUser = userMapper.toUser(userRequest);
 
