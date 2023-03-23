@@ -1,5 +1,6 @@
 version: '3'
 #https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
+#https://github.com/lemoncode21/docker-loging-elk/blob/master/docker-compose.yml
 services:
   postgres:
     image: postgres:15

@@ -51,6 +51,7 @@ public class AuthController {
 
     @PostMapping("/v1/login")
     public ResponseEntity<AuthResponseDTO> registerUser(@RequestBody @Valid LoginDTO loginDTO) {
+        logger.info("attempt to login user. login = {}", loginDTO.getLogin());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getLogin(),
