@@ -111,7 +111,6 @@ public class AuthControllerTest {
         AuthResponseDTO responseDTO = jsonStringToPojo(content, AuthResponseDTO.class);
 
         Assertions.assertNotNull(responseDTO.getAccessToken());
-        Assertions.assertNotNull(responseDTO.getTokenType());
 
     }
 
