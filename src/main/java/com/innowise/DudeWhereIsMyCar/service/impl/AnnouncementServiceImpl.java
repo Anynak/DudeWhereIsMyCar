@@ -6,7 +6,10 @@ import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria
 import com.innowise.DudeWhereIsMyCar.dto.responses.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
 import com.innowise.DudeWhereIsMyCar.external.feign.CurrencyClient;
-import com.innowise.DudeWhereIsMyCar.external.feign.dto.CurrencyRate;
+import com.innowise.DudeWhereIsMyCar.external.feign.dto.CurrencyName;
+
+import com.innowise.DudeWhereIsMyCar.external.feign.dto.CurrencyRateRequest;
+import com.innowise.DudeWhereIsMyCar.external.feign.dto.CurrencyRateResponse;
 import com.innowise.DudeWhereIsMyCar.models.Announcement;
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementRepository;
 import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementSearchRepository;
@@ -47,12 +50,17 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public List<AnnouncementResponse> convertAnnouncementPrice(List<AnnouncementResponse> announcements, String from, String to) {
-        CurrencyRate currencyRate = currencyClient.getCurrencyRate(from.toUpperCase(), to.toUpperCase());
+        CurrencyRateRequest rateRequest = new CurrencyRateRequest();
+        rateRequest.setBaseCurrency(CurrencyName.valueOf(from.toUpperCase()));
+        rateRequest.setRateRequests(List.of(CurrencyName.valueOf(to.toUpperCase())));
+
+        CurrencyRateResponse rateResponse = currencyClient.getCurrencyRate(rateRequest);
+        Float rate = rateResponse.getRates().get(CurrencyName.valueOf(to.toUpperCase()));
         return announcements.stream()
                 .map(a -> new AnnouncementResponse(
                         a.getAnnouncementId(),
                         a.getVehicle(),
-                        a.getPrice() * currencyRate.result,
+                        a.getPrice() * rate,
                         to,
                         a.getComment()))
                 .toList();
