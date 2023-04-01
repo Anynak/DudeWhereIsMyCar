@@ -54,7 +54,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         rateRequest.setBaseCurrency(CurrencyName.valueOf(from.toUpperCase()));
         rateRequest.setRateRequests(List.of(CurrencyName.valueOf(to.toUpperCase())));
 
-        CurrencyRateResponse rateResponse = currencyClient.getCurrencyRate(rateRequest);
+        CurrencyRateResponse rateResponse = currencyClient.getCurrencyRate(rateRequest.getBaseCurrency(),rateRequest.getRateRequests());
         Float rate = rateResponse.getRates().get(CurrencyName.valueOf(to.toUpperCase()));
         return announcements.stream()
                 .map(a -> new AnnouncementResponse(
