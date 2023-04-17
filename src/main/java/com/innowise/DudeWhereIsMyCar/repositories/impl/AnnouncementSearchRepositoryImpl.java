@@ -1,9 +1,10 @@
-package com.innowise.DudeWhereIsMyCar.repositories;
+package com.innowise.DudeWhereIsMyCar.repositories.impl;
 
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchAnnouncementRequest;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.models.Announcement;
+import com.innowise.DudeWhereIsMyCar.repositories.AnnouncementSearchRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;

@@ -5,7 +5,7 @@ import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.PageCriteria;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchUserRequest;
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.models.User;
-import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepositoryImpl;
+import com.innowise.DudeWhereIsMyCar.repositories.impl.UserSearchRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

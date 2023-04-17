@@ -8,8 +8,10 @@ import com.innowise.DudeWhereIsMyCar.dto.requests.userRequests.RegisterUserReque
 import com.innowise.DudeWhereIsMyCar.exceptions.ResourceNotFoundException;
 import com.innowise.DudeWhereIsMyCar.models.Role;
 import com.innowise.DudeWhereIsMyCar.models.User;
+import com.innowise.DudeWhereIsMyCar.repositories.CustomUserSearchRepo;
 import com.innowise.DudeWhereIsMyCar.repositories.UserRepository;
 import com.innowise.DudeWhereIsMyCar.repositories.UserSearchRepository;
+import com.innowise.DudeWhereIsMyCar.repositories.impl.CustomUserSearchRepoImpl;
 import com.innowise.DudeWhereIsMyCar.service.RoleService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserSearchRepository userSearchRepository;
+    private final CustomUserSearchRepo customUserSearchRepo;
     private final BeforeRegisterUserChecker beforeRegisterUserChecker;
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -70,7 +73,9 @@ public class UserServiceImpl implements UserService {
             SearchUserRequest searchUserRequest
             , PageCriteria pageCriteria
             , SortingCriteria sortingCriteria) {
-        return userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
+        //return userSearchRepository.search(searchUserRequest, pageCriteria, sortingCriteria);
+        return customUserSearchRepo.search(searchUserRequest, pageCriteria, sortingCriteria);
+
     }
 
     @Override
