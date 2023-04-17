@@ -5,6 +5,11 @@ import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SearchUserReque
 import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.repositories.CustomUserSearchRepo;
+import com.innowise.DudeWhereIsMyCar.repositories.utils.QPredicates;
+import com.querydsl.core.types.*;
+import com.querydsl.core.types.dsl.ComparableExpressionBase;
+
+import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +26,26 @@ public class CustomUserSearchRepoImpl implements CustomUserSearchRepo {
 
     @Override
     public List<User> search(SearchUserRequest searchRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria) {
+
+        Predicate searchRequestPredicate = QPredicates.builder()
+                .add(searchRequest.getCountry(), user.country::containsIgnoreCase)
+                .add(searchRequest.getCity(), user.city::containsIgnoreCase)
+                .buildAnd();
+
+        OrderSpecifier<?> orderSpecifier = user.userId.asc();
+
+        if(sortingCriteria.getSortBy()!=null){
+            PathBuilder<User> pathBuilder = new PathBuilder<>(User.class, user.toString());
+            ComparableExpressionBase<?> path = pathBuilder.getString(sortingCriteria.getSortBy());
+            orderSpecifier = path.asc();
+        }
+
         return new JPAQuery<User>(entityManager)
                 .select(user)
                 .from(user)
-                .where(user.country.containsIgnoreCase(searchRequest.getCountry())
-                        .and(user.city.containsIgnoreCase(searchRequest.getCity())))
+                .where(searchRequestPredicate)
+                .offset(pageCriteria.getPageNumber())
+                .limit(pageCriteria.getPageSize()).orderBy(orderSpecifier)
                 .fetch();
     }
 }
