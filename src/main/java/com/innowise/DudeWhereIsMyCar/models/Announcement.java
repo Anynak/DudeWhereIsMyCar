@@ -1,5 +1,6 @@
 package com.innowise.DudeWhereIsMyCar.models;
 
+import com.querydsl.core.annotations.QueryInit;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -21,6 +22,7 @@ public class Announcement {
     @Column(name = "announcement_id", nullable = false)
     private Long announcementId;
 
+    @QueryInit("*.*")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Vehicle vehicle;
 

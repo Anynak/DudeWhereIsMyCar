@@ -28,8 +28,7 @@ public class QAnnouncementServiceImpl implements QAnnouncementService {
     public List<Announcement> searchAnnouncement(SearchAnnouncementRequest searchRequest, PageCriteria pageCriteria, SortingCriteria sortingCriteria) {
 //https://github.com/querydsl/querydsl/issues/2129
         Predicate searchRequestPredicate = QPredicates.builder()
-                //todo fix this
-                //.add(searchRequest.getVehicleBrandName(), announcement.vehicle.vehicleModel.vehicleBrand.vehicleBrandName::like)
+                .add(searchRequest.getVehicleBrandName(), announcement.vehicle.vehicleModel.vehicleBrand.vehicleBrandName::like)
                 .add(searchRequest.getVehicleModelName(), announcement.vehicle.vehicleModel.vehicleModelName::like)
                 .add(searchRequest.getColor(), announcement.vehicle.color::like)
                 .add(searchRequest.getPriceMax(), announcement.price::loe)

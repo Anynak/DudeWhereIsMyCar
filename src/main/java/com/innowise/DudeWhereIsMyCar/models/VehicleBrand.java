@@ -21,7 +21,6 @@ public class VehicleBrand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_brand_id", nullable = false)
     private Long vehicleBrandId;
-
     @Column(name = "vehicle_brand_name", nullable = false, unique = true)
     private String vehicleBrandName;
 
