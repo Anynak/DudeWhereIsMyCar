@@ -1,4 +1,4 @@
-package com.innowise.DudeWhereIsMyCar.repositories.utils;
+package com.innowise.DudeWhereIsMyCar.service.utils;
 
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;
@@ -20,6 +20,7 @@ public class QPredicates {
         return this;
 
     }
+
 
     public Predicate buildAnd() {
         return ExpressionUtils.allOf(predicates);

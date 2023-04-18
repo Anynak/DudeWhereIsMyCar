@@ -7,6 +7,7 @@ import com.innowise.DudeWhereIsMyCar.dto.requests.searchCriteria.SortingCriteria
 import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponse;
 import com.innowise.DudeWhereIsMyCar.dto.responses.UserResponseFull;
 import com.innowise.DudeWhereIsMyCar.models.User;
+import com.innowise.DudeWhereIsMyCar.service.QUserService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final QUserService qUserService;
     private final UserMapper userMapper;
 
 
@@ -39,7 +41,7 @@ public class UserController {
             @Valid PageCriteria pageCriteria,
             @Valid SortingCriteria sortingCriteria) {
 
-        List<User> users = userService.searchUser(searchUserRequest, pageCriteria, sortingCriteria);
+        List<User> users = qUserService.searchUser(searchUserRequest, pageCriteria, sortingCriteria);
         return userMapper.toUserResponseFull(users);
     }
 

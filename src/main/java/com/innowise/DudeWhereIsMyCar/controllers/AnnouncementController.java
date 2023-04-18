@@ -10,6 +10,7 @@ import com.innowise.DudeWhereIsMyCar.dto.responses.AnnouncementResponse;
 import com.innowise.DudeWhereIsMyCar.models.Announcement;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.AnnouncementService;
+import com.innowise.DudeWhereIsMyCar.service.QAnnouncementService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
@@ -30,6 +31,7 @@ import java.util.List;
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
+    private final QAnnouncementService qAnnouncementService;
     private final AnnouncementMapper announcementMapper;
     private final UserService userService;
 
@@ -50,7 +52,7 @@ public class AnnouncementController {
             @Valid PageCriteria pageCriteria,
             @Valid SortingCriteria sortingCriteria) {
 
-        List<Announcement> announcements = announcementService.searchAnnouncement(searchAnnouncementRequest, pageCriteria, sortingCriteria);
+        List<Announcement> announcements = qAnnouncementService.searchAnnouncement(searchAnnouncementRequest, pageCriteria, sortingCriteria);
         List<AnnouncementResponse> responses = announcementMapper.toAnnouncementResponse(announcements);
         if (currency != null) {
             responses = announcementService.convertAnnouncementPrice(responses, Const.defaultCurrency, currency);

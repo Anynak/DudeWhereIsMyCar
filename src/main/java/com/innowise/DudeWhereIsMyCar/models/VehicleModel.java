@@ -1,12 +1,12 @@
 package com.innowise.DudeWhereIsMyCar.models;
 
+import com.querydsl.core.annotations.QueryInit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//todo Make Composite Key
 @Getter
 @Setter
 @ToString
@@ -23,6 +23,7 @@ public class VehicleModel {
     @Column(name = "vehicle_model_name", nullable = false)
     private String vehicleModelName;
 
+    @QueryInit("*")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     private VehicleBrand vehicleBrand;
