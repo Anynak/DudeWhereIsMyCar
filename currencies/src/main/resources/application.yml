@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://currencies_postgres:5432/currencies
+    password: '1111'
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    show-sql: 'true'
+    #hibernate:
+    #  ddl-auto: validate
+  flyway:
+    enabled: true
+    locations: db/migration
+
+server:
+  servlet:
+    contextPath: /api
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
+

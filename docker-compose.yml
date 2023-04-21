@@ -2,6 +2,10 @@ version: '3.9'
 #https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
 #https://github.com/lemoncode21/docker-loging-elk/blob/master/docker-compose.yml
 services:
+  currencies_service:
+    image: docker/compose
+    command:
+      - f /currencies/docker-compose.yml up
   postgres:
     image: postgres:15
     environment:
@@ -133,11 +137,11 @@ networks:
     name: shared-currencies
     driver: bridge
 
-
-
 volumes:
   elasticsearch_data:
     driver: local
+
+
   #zoo1:
   #  image: confluentinc/cp-zookeeper:7.3.0
   #  hostname: zoo1
