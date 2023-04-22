@@ -7,16 +7,14 @@ services:
     ports:
       - "8082:8080"
     depends_on:
-      - postgres
+      - currencies_postgres
     networks:
-      - currenciesDb
+      - currencies_postgres
       - currencies
 
-
-  postgres:
+  currencies_postgres:
     image: postgres:15
     container_name: currencies_postgres
-
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1111
@@ -27,27 +25,24 @@ services:
     ports:
       - "5433:5432"
     networks:
-      - currenciesDb
+      - currencies_postgres
 
-
-
-
-  pgadmin:
+  currencies_pgadmin:
     image: dpage/pgadmin4
     container_name: currencies_pgadmin4_container
     restart: always
     ports:
       - "5051:80"
     depends_on:
-      - postgres
+      - currencies_postgres
     environment:
       PGADMIN_DEFAULT_EMAIL: toha@gmail.com
       PGADMIN_DEFAULT_PASSWORD: 1111
     networks:
-      - currenciesDb
+      - currencies_postgres
 
 networks:
-  currenciesDb:
+  currencies_postgres:
     driver: bridge
   currencies:
     name: shared-currencies
