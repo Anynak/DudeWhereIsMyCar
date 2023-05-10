@@ -27,6 +27,10 @@ spring:
       bootstrap-servers: broker:29092
     consumer:
       bootstrap-servers: broker:29092
+schedulerPrint:
+  intervalMs: 30000
+  initialDelayMs: 0
+
 #keytool -genkeypair -alias DudeWhereIsMyCar -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore keystore.p12 -validity 3650 -storepass Qwerty123
 server:
   ssl:
