@@ -31,6 +31,20 @@ schedulerPrint:
   intervalMs: 30000
   initialDelayMs: 0
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 #keytool -genkeypair -alias DudeWhereIsMyCar -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore keystore.p12 -validity 3650 -storepass Qwerty123
 server:
   ssl:

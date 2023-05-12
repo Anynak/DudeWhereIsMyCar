@@ -48,6 +48,8 @@ dependencies {
     implementation "org.springframework:spring-websocket:${websocket}"
     implementation "org.springframework:spring-messaging:${websocket}"
     implementation "net.logstash.logback:logstash-logback-encoder:7.3"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:3.0.6'
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.11.0'
 
     //https://www.youtube.com/watch?v=KMWrpI8an7o
     implementation("com.querydsl:querydsl-core:${queryDslVersion}")
