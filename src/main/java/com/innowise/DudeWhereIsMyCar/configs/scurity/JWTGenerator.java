@@ -17,13 +17,13 @@ public class JWTGenerator {
 
     Key key = new SecretKeySpec(Base64.getDecoder().decode(SecurityConstants.JWT_SECRET), SignatureAlgorithm.HS256.getJcaName());
 
-    public String generateToken(Authentication authentication) {
+    public String generateToken(Authentication authentication, String sessionId) {
         String username = authentication.getName();
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + SecurityConstants.JWT_EXPIRATION);
 
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(username).claim("sessionId", sessionId)
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
                 .signWith(key)

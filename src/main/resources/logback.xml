@@ -6,7 +6,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - User.login=%X{User.login} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - User.login=%X{User.login} - Session.id=%X{Session.id} - %msg%n</pattern>
         </encoder>
     </appender>
 

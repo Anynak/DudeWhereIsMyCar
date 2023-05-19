@@ -15,12 +15,14 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
 
     private final String login;
+    private final Long userId;
     private final String passwordHash;
     private final Boolean isDeleted;
     private final Collection<GrantedAuthority> authority;
 
     public UserDetailsImpl(User user) {
         this.login = user.getLogin();
+        this.userId = user.getUserId();
         this.passwordHash = user.getPasswordHash();
         this.isDeleted = user.getIsDeleted();
         this.authority = mapRolesToAuthorities(user.getRoles());

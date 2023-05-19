@@ -10,6 +10,7 @@ import com.innowise.DudeWhereIsMyCar.exceptions.AlreadyLoggedException;
 import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.AuthenticationService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +38,7 @@ import java.util.List;
 public class AuthController {
     private final UserService userService;
     private final UserMapper userMapper;
-    private final AuthenticationService authenticate;
+    private final AuthenticationService authenticationService;
     private final JWTGenerator jwtGenerator;
 
 
@@ -50,14 +53,12 @@ public class AuthController {
     }
 
     @PostMapping("/v1/login")
-    public ResponseEntity<AuthResponseDTO> authUser(@RequestBody @Valid LoginDTO loginDTO) {
-        MDC.put("User.login", loginDTO.getLogin());
+    public ResponseEntity<AuthResponseDTO> authUser(@RequestBody @Valid LoginDTO loginDTO, HttpSession session) {
         log.info("attempt to login user");
-        Authentication authentication = authenticate.authenticate(loginDTO.getLogin(), loginDTO.getPassword());
-        String token = jwtGenerator.generateToken(authentication);
+        Authentication authentication = authenticationService.authenticate(loginDTO.getLogin(), loginDTO.getPassword());
+        String token = jwtGenerator.generateToken(authentication, session.getId());
         List<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
         AuthResponseDTO authResponseDTO = new AuthResponseDTO(token, roles);
-        MDC.clear();
         return new ResponseEntity<>(authResponseDTO, HttpStatus.OK);
     }
 
