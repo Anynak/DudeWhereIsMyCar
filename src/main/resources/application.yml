@@ -3,7 +3,9 @@
 #http://localhost:5050/browser/
 #http://localhost:5601/app/home#/
 
-
+app:
+  name: 'Dude Where Is MyCar'
+  version: '1.01'
 
 spring:
   datasource:

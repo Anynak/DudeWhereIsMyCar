@@ -12,6 +12,7 @@ import com.innowise.DudeWhereIsMyCar.models.User;
 import com.innowise.DudeWhereIsMyCar.service.AnnouncementService;
 import com.innowise.DudeWhereIsMyCar.service.QAnnouncementService;
 import com.innowise.DudeWhereIsMyCar.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/announcements")
 @Validated
+@SecurityRequirement(name = "bearerAuth")
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
