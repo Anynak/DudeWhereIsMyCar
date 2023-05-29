@@ -47,7 +47,7 @@ management:
     metrics:
       export:
         enabled: true
-#keytool -genkeypair -alias DudeWhereIsMyCar -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore keystore.p12 -validity 3650 -storepass Qwerty123
+#keytool -genkeypair -alias dude_where_is_my_car -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore keystore.p12 -validity 3650 -storepass Qwerty123
 server:
   ssl:
     key-store: classpath:keystore.p12
