@@ -27,13 +27,13 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 @Import(UserSearchRepositoryImpl.class)
 @SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = BEFORE_TEST_METHOD)})
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class UserSearchRepositoryImplTest {
+class UserSearchRepositoryImplTest {
 
     @Autowired
     private UserSearchRepositoryImpl userSearchRepository;
 
     @Test
-    public void checkMinPageSizeWithDefaultSearchParameters() {
+    void checkMinPageSizeWithDefaultSearchParameters() {
         int pageSize = Const.MIN_PAGE_SIZE;
         SearchUserRequest searchUserRequest = new SearchUserRequest();
         PageCriteria pageCriteria = new PageCriteria();
@@ -45,7 +45,7 @@ public class UserSearchRepositoryImplTest {
     }
 
     @Test
-    public void checkCorrectPageSize() {
+    void checkCorrectPageSize() {
         int pageSize = 7;
         PageCriteria pageCriteria = new PageCriteria();
         pageCriteria.setPageSize(pageSize);
@@ -58,7 +58,7 @@ public class UserSearchRepositoryImplTest {
     }
 
     @Test
-    public void checkCorrectPageNumber() {
+    void checkCorrectPageNumber() {
         SearchUserRequest searchUserRequest = new SearchUserRequest();
         SortingCriteria sortingCriteria = new SortingCriteria();
         PageCriteria pageCriteria = new PageCriteria();
@@ -91,7 +91,7 @@ public class UserSearchRepositoryImplTest {
     }
 
     @Test
-    public void ifASCSortingCorrect() {
+    void ifASCSortingCorrect() {
         SearchUserRequest searchUserRequest = new SearchUserRequest();
         PageCriteria pageCriteria = new PageCriteria();
         SortingCriteria sortingCriteria = new SortingCriteria();
@@ -107,7 +107,7 @@ public class UserSearchRepositoryImplTest {
     }
 
     @Test
-    public void ifNotASCSortingCorrect() {
+    void ifNotASCSortingCorrect() {
         SearchUserRequest searchUserRequest = new SearchUserRequest();
         PageCriteria pageCriteria = new PageCriteria();
         SortingCriteria sortingCriteria = new SortingCriteria();
@@ -124,7 +124,7 @@ public class UserSearchRepositoryImplTest {
     }
 
     @Test
-    public void ifSearchByCountryCorrect() {
+    void ifSearchByCountryCorrect() {
         PageCriteria pageCriteria = new PageCriteria();
         pageCriteria.setPageSize(100);
         SortingCriteria sortingCriteria = new SortingCriteria();
@@ -140,7 +140,7 @@ public class UserSearchRepositoryImplTest {
     }
 
     @Test
-    public void ifSearchByCityCorrect() {
+    void ifSearchByCityCorrect() {
         PageCriteria pageCriteria = new PageCriteria();
         pageCriteria.setPageSize(100);
         SortingCriteria sortingCriteria = new SortingCriteria();

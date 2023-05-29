@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @ExtendWith(MockitoExtension.class)
-public class BeforeRegisterUserCheckerTest {
+class BeforeRegisterUserCheckerTest {
     @Mock
     private UserRepository userRepository;
     @InjectMocks
     private BeforeRegisterUserChecker beforeRegisterUserChecker;
 
     @Test
-    public void userAlreadyExistsExceptionCheck() {
+    void userAlreadyExistsExceptionCheck() {
         Mockito.when(userRepository.existsByLogin(anyString())).thenReturn(true);
         RegisterUserRequest registerUserRequest = new RegisterUserRequest();
         registerUserRequest.setLogin("existingLogin");
@@ -34,7 +34,7 @@ public class BeforeRegisterUserCheckerTest {
     }
 
     @Test
-    public void emailAlreadyExistsExceptionCheck() {
+    void emailAlreadyExistsExceptionCheck() {
         Mockito.when(userRepository.existsByEmail(anyString())).thenReturn(true);
         RegisterUserRequest registerUserRequest = new RegisterUserRequest();
         registerUserRequest.setEmail("existingEmail");
@@ -44,7 +44,7 @@ public class BeforeRegisterUserCheckerTest {
     }
 
     @Test
-    public void phoneAlreadyExistsExceptionCheck() {
+    void phoneAlreadyExistsExceptionCheck() {
         Mockito.when(userRepository.existsByPhone(anyString())).thenReturn(true);
         RegisterUserRequest registerUserRequest = new RegisterUserRequest();
         registerUserRequest.setPhone("existingPhone");

@@ -43,7 +43,8 @@ public class QAnnouncementServiceImpl implements QAnnouncementService {
         if (sortingCriteria.getSortBy() != null) {
             PathBuilder<Announcement> pathBuilder = new PathBuilder<>(Announcement.class, announcement.toString());
             ComparableExpressionBase<?> path = pathBuilder.getString(sortingCriteria.getSortBy());
-            if (!sortingCriteria.getAsc()) {
+            Boolean isAsc = sortingCriteria.getAsc();
+            if (Boolean.FALSE.equals(isAsc)) {
                 orderSpecifier = path.desc();
             } else {
                 orderSpecifier = path.asc();

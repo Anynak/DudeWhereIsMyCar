@@ -29,7 +29,8 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
         Root<User> root = criteriaQuery.from(User.class);
 
         if (sortingCriteria != null && sortingCriteria.getSortBy() != null) {
-            if (sortingCriteria.getAsc()) {
+            Boolean isAsc = sortingCriteria.getAsc();
+            if (Boolean.TRUE.equals(isAsc)) {
                 criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
             } else {
                 criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
@@ -38,7 +39,7 @@ public class UserSearchRepositoryImpl implements UserSearchRepository {
 
         List<Predicate> predicates = createPredicate(searchRequest, criteriaBuilder, root);
 
-        if (predicates.size() != 0) {
+        if (!predicates.isEmpty()) {
             Predicate orPredicate = criteriaBuilder.or(predicates.toArray(new Predicate[0]));
             criteriaQuery.where(orPredicate);
         }

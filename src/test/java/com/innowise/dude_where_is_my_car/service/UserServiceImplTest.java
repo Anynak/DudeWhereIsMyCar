@@ -24,7 +24,7 @@ import static org.mockito.Mockito.verify;
 //https://www.baeldung.com/mockito-argumentcaptor
 //https://www.baeldung.com/mockito-argument-matchers
 @ExtendWith(MockitoExtension.class)
-public class UserServiceImplTest {
+class UserServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
@@ -42,7 +42,7 @@ public class UserServiceImplTest {
     private UserServiceImpl userService;
 
     @Test
-    public void saveNewUserWitDefaultRoleAsUSER() {
+    void saveNewUserWitDefaultRoleAsUSER() {
 
         Mockito.when(userMapper.toUser(any(RegisterUserRequest.class))).thenReturn(new User());
         Mockito.when(roleService.getRoleByName("USER")).thenAnswer(roleName -> {
@@ -63,7 +63,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void saveNewUserWithEncodedPassword() {
+    void saveNewUserWithEncodedPassword() {
         String password = "qwerty";
         RegisterUserRequest userRequest = new RegisterUserRequest();
         userRequest.setPassword(password);
@@ -81,7 +81,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void checkUserBeforeRegistration() {
+    void checkUserBeforeRegistration() {
         RegisterUserRequest userRequest = new RegisterUserRequest();
         userRequest.setLogin("login");
         Mockito.when(userMapper.toUser(any(RegisterUserRequest.class))).thenReturn(new User());
@@ -92,7 +92,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void checkThatUserRemovalIsSoft() {
+    void checkThatUserRemovalIsSoft() {
         User user = new User();
         user.setIsDeleted(false);
         Optional<User> opt = Optional.of(user);

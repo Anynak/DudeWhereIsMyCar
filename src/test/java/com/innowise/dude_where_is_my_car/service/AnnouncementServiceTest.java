@@ -17,14 +17,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 
 @ExtendWith(MockitoExtension.class)
-public class AnnouncementServiceTest {
+class AnnouncementServiceTest {
     @Mock
     private AnnouncementRepository announcementRepository;
     @InjectMocks
     private AnnouncementServiceImpl announcementService;
 
     @Test
-    public void checkThatAnnouncementRemovalIsSoft() {
+    void checkThatAnnouncementRemovalIsSoft() {
         Announcement announcement = new Announcement();
         boolean isDeleted = false;
         announcement.setIsDeleted(isDeleted);

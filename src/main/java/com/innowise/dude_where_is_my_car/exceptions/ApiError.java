@@ -3,7 +3,6 @@ package com.innowise.dude_where_is_my_car.exceptions;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +16,7 @@ public class ApiError {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
 
-    public ApiError(HttpStatus status, String error, String userMessage) {
+    public ApiError(String error, String userMessage) {
         super();
         this.userMessage = userMessage;
         this.error = error;

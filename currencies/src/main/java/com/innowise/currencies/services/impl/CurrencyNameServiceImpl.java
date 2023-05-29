@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +27,7 @@ public class CurrencyNameServiceImpl implements CurrencyNameService {
 
     @Override
     public List<Currency> saveAll(List<CurrencyName> currencies) {
-        List<Currency> c = currencies.stream().map(s -> new Currency(s.name())).collect(Collectors.toList());
+        List<Currency> c = currencies.stream().map(s -> new Currency(s.name())).toList();
         return currencyRepository.saveAll(c);
     }
 }

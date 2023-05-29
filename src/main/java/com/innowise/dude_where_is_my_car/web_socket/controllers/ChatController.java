@@ -21,7 +21,7 @@ public class ChatController {
 
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
-    public OutputChatMessage send(InputChatMessage message) throws Exception {
+    public OutputChatMessage send(InputChatMessage message){
 
         if (StringUtils.hasText(message.getFrom()) && tokenGenerator.validateToken(message.getFrom())) {
             String username = tokenGenerator.getUsernameFromJWT(message.getFrom());

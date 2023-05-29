@@ -74,7 +74,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void accessDeniedIfWrongPasswordTest() throws Exception {
+    void accessDeniedIfWrongPasswordTest() throws Exception {
         String correctLogin = "admin";
         String wrongPassword = "Admin1112";
 
@@ -87,7 +87,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void accessDeniedIfWrongLoginTest() throws Exception {
+    void accessDeniedIfWrongLoginTest() throws Exception {
         String correctLogin = "adminn";
         String wrongPassword = "Admin1111";
 
@@ -99,7 +99,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void loginUserTest() throws Exception {
+    void loginUserTest() throws Exception {
         String correctLogin = "admin";
         String correctPassword = "Admin1111";
 

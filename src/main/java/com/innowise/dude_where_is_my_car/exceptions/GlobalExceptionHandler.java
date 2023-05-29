@@ -38,19 +38,19 @@ public class GlobalExceptionHandler {
 
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             String userMessage = fieldError.getField() + " " + fieldError.getDefaultMessage();
-            ApiError apiError = new ApiError(httpStatus, userMessage, userMessage);
+            ApiError apiError = new ApiError(userMessage, userMessage);
             apiErrors.add(apiError);
         }
         for (ObjectError objectError : bindingResult.getGlobalErrors()) {
             String userMessage = objectError.getDefaultMessage();
-            ApiError apiError = new ApiError(httpStatus, userMessage, userMessage);
+            ApiError apiError = new ApiError(userMessage, userMessage);
             apiErrors.add(apiError);
         }
         return new ResponseEntity<>(apiErrors, httpStatus);
     }
 
     private ResponseEntity<Object> createResponse(Exception ex, String errorText, HttpStatus httpStatus) {
-        ApiError apiError = new ApiError(httpStatus, ex.getMessage(), errorText);
+        ApiError apiError = new ApiError(ex.getMessage(), errorText);
         List<ApiError> errors = new ArrayList<>();
         errors.add(apiError);
         return new ResponseEntity<>(errors, httpStatus);

@@ -15,14 +15,16 @@ public class BeforeRegisterUserChecker {
     private final UserRepository userRepository;
 
     public void check(RegisterUserRequest userReq) {
+        String alreadyExistsLogLabel = " already exists";
+
         boolean loginExists = userRepository.existsByLogin(userReq.getLogin());
-        if (loginExists) throw new UserAlreadyExistsException("login " + userReq.getLogin() + " already exists");
+        if (loginExists) throw new UserAlreadyExistsException("login " + userReq.getLogin() + alreadyExistsLogLabel);
 
         boolean emailExists = userRepository.existsByEmail(userReq.getEmail());
-        if (emailExists) throw new EmailAlreadyExistsException("email " + userReq.getEmail() + " already exists");
+        if (emailExists) throw new EmailAlreadyExistsException("email " + userReq.getEmail() + alreadyExistsLogLabel);
 
         boolean phoneExists = userRepository.existsByPhone(userReq.getPhone());
         if (phoneExists)
-            throw new PhoneNumberAlreadyExistsException("phone number " + userReq.getPhone() + " already exists");
+            throw new PhoneNumberAlreadyExistsException("phone number " + userReq.getPhone() + alreadyExistsLogLabel);
     }
 }

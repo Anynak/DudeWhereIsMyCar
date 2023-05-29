@@ -43,7 +43,7 @@ public class CurrencyRateServiceImpl implements CurrencyRateService {
     public CurrencyRateResponse getLast() {
         LocalDate lastDate = currencyRateRepository.findLatestDate();
         List<CurrencyRate> currencyRates = getByDateWithCurrency(lastDate);
-        if (currencyRates.size() != 0) {
+        if (!currencyRates.isEmpty()) {
             return currencyRateMapper.toCurrencyRateResponse(currencyRates);
         } else {
             CurrencyRateResponse response = currencyClient.getCurrencyRate();

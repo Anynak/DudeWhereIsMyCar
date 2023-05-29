@@ -35,7 +35,8 @@ public class QUserServiceImpl implements QUserService {
         if (sortingCriteria.getSortBy() != null) {
             PathBuilder<User> pathBuilder = new PathBuilder<>(User.class, user.toString());
             ComparableExpressionBase<?> path = pathBuilder.getString(sortingCriteria.getSortBy());
-            if (!sortingCriteria.getAsc()) {
+            Boolean isAsc = sortingCriteria.getAsc();
+            if (Boolean.FALSE.equals(isAsc)) {
                 orderSpecifier = path.desc();
             } else {
                 orderSpecifier = path.asc();

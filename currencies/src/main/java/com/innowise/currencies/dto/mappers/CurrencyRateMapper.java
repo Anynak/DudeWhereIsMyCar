@@ -7,7 +7,7 @@ import com.innowise.currencies.model.CurrencyRate;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +27,7 @@ public interface CurrencyRateMapper {
 
     default CurrencyRateResponse toCurrencyRateResponse(List<CurrencyRate> rateList) {
 
-        Map<CurrencyName, Float> rates = new HashMap<>();
+        Map<CurrencyName, Float> rates = new EnumMap<>(CurrencyName.class);
         for (CurrencyRate cr : rateList) {
             rates.put(CurrencyName.valueOf(cr.getCurrency().getCurrencyName()), cr.getRate());
         }

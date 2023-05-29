@@ -21,14 +21,14 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 @DataJpaTest
 @SqlGroup({@Sql(value = "classpath:test-user-data.sql", executionPhase = BEFORE_TEST_METHOD)})
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class UserRepositoryTest {
+class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
 
 
     @Test
-    public void saveUserTest() {
+    void saveUserTest() {
         User user = generateUsers(1).get(0);
 
         User savedUser = userRepository.save(user);
@@ -39,7 +39,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void findUserBuLoginTest() {
+    void findUserBuLoginTest() {
         String testLogin = "testLogin";
 
         Optional<User> optUser = userRepository.findUserByLogin(testLogin);
@@ -50,7 +50,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void findByIdTest() {
+    void findByIdTest() {
         Long testId = 10000L;
 
         Optional<User> optUser = userRepository.findById(testId);
