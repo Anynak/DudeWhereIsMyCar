@@ -35,9 +35,9 @@ public class VehicleBrandController {
     }
 
     @DeleteMapping("/v1/{brandId}")
-    public ResponseEntity<?> removeVehicleBrand(@PathVariable Long brandId) {
+    @ResponseStatus(HttpStatus.OK)
+    public void removeVehicleBrand(@PathVariable Long brandId) {
         vehicleBrandService.removeVehicleBrandById(brandId);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/v1")

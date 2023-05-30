@@ -33,9 +33,9 @@ public class VehicleModelController {
     }
 
     @DeleteMapping("/v1/{modelId}")
-    public ResponseEntity<?> removeVehicleModel(@PathVariable Long modelId) {
+    @ResponseStatus(HttpStatus.OK)
+    public void removeVehicleModel(@PathVariable Long modelId) {
         vehicleModelService.removeVehicleModelById(modelId);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/v1/all")

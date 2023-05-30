@@ -6,6 +6,7 @@ import com.innowise.dude_where_is_my_car.dto.requests.user_requests.LoginDTO;
 import com.innowise.dude_where_is_my_car.dto.responses.AuthResponseDTO;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -65,7 +66,7 @@ public class AuthControllerTest {
         }
     }
 
-    @Before
+    @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)

@@ -37,6 +37,7 @@ public class UserControllerTest {
     @Container
     public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:15");
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private MockMvc mockMvc;
 
     @DynamicPropertySource
@@ -56,7 +57,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void givenInvalidRole_whenGetSecureRequest_thenForbidden() throws Exception {
+    void givenInvalidRole_whenGetSecureRequest_thenForbidden() throws Exception {
         String accessToken = obtainAccessToken("admin", "Admin1111");
 
         mockMvc.perform(MockMvcRequestBuilders.get("/users/v1")
