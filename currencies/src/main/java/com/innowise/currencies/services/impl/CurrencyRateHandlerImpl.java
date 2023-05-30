@@ -6,7 +6,9 @@ import com.innowise.currencies.services.CurrencyRateHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,12 +48,14 @@ public class CurrencyRateHandlerImpl implements CurrencyRateHandler {
      * according to the new base currency provided by the user
      */
     private Map<CurrencyName, Float> convertToBaseCurrency(Map<CurrencyName, Float> rates, Float base) {
+        // Use a lambda expression to simplify the stream operation
         return rates.entrySet().stream()
-                .peek(entry -> {
-                    Float newRate = entry.getValue() / base;
-                    DecimalFormat df = new DecimalFormat("#.######");
-                    newRate = Float.parseFloat(df.format(newRate));
-                    entry.setValue(newRate);
+                .map(entryRate -> {
+                    // Use BigDecimal to avoid floating-point errors
+                    BigDecimal newRate = BigDecimal.valueOf(entryRate.getValue())
+                            .divide(BigDecimal.valueOf(base), 6, RoundingMode.HALF_UP);
+                    // Use the CurrencyName enum as the key instead of the entryRate object
+                    return new AbstractMap.SimpleEntry<>(entryRate.getKey(), newRate.floatValue());
                 }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

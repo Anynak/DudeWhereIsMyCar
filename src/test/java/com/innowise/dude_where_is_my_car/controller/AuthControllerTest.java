@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.innowise.dude_where_is_my_car.dto.requests.user_requests.LoginDTO;
 import com.innowise.dude_where_is_my_car.dto.responses.AuthResponseDTO;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,6 +45,7 @@ public class AuthControllerTest {
     @Container
     public static PostgreSQLContainer<?> pgsql = new PostgreSQLContainer<>("postgres:15");
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext context;
@@ -109,16 +109,16 @@ public class AuthControllerTest {
                 .content(asJsonString(new LoginDTO(correctLogin, correctPassword)))
         ).andDo(print()).andExpect(status().isOk()).andReturn();
         String content = resultActions.getResponse().getContentAsString();
-        AuthResponseDTO responseDTO = jsonStringToPojo(content, AuthResponseDTO.class);
+        AuthResponseDTO responseDTO = jsonStringToPojo(content);
 
         Assertions.assertNotNull(responseDTO.getAccessToken());
 
     }
 
-    private <T> T jsonStringToPojo(String jsonInString, Class<T> obj) {
+    private AuthResponseDTO jsonStringToPojo(String jsonInString) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(jsonInString, obj);
+            return mapper.readValue(jsonInString, AuthResponseDTO.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
