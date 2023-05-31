@@ -1,6 +1,6 @@
 package com.innowise.dude_where_is_my_car.external.message_brockers.kafka.current.configs;
 
-import com.innowise.dude_where_is_my_car.external.message_brockers.dto.SumTask;
+import com.innowise.dude_where_is_my_car.external.message_brockers.SumTaskDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ public class CurrentProducerConfig {
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String brokerServer;
 
-    public ProducerFactory<String, SumTask> producerFactory() {
+    public ProducerFactory<String, SumTaskDto> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokerServer);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -28,7 +28,7 @@ public class CurrentProducerConfig {
     }
 
     @Bean("currentKafkaTemplate")
-    public KafkaTemplate<String, SumTask> currentKafkaTemplate() {
+    public KafkaTemplate<String, SumTaskDto> currentKafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

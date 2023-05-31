@@ -1,6 +1,6 @@
 package com.innowise.dude_where_is_my_car.controllers;
 
-import com.innowise.dude_where_is_my_car.configs.consts.Const;
+import com.innowise.dude_where_is_my_car.configs.Constants;
 import com.innowise.dude_where_is_my_car.dto.mapers.AnnouncementMapper;
 import com.innowise.dude_where_is_my_car.dto.requests.search_criteria.PageCriteria;
 import com.innowise.dude_where_is_my_car.dto.requests.search_criteria.SearchAnnouncementRequest;
@@ -57,7 +57,7 @@ public class AnnouncementController {
         List<Announcement> announcements = qAnnouncementService.searchAnnouncement(searchAnnouncementRequest, pageCriteria, sortingCriteria);
         List<AnnouncementResponse> responses = announcementMapper.toAnnouncementResponse(announcements);
         if (currency != null) {
-            responses = announcementService.convertAnnouncementPrice(responses, Const.DEFAULT_CURRENCY, currency);
+            responses = announcementService.convertAnnouncementPrice(responses, Constants.DEFAULT_CURRENCY, currency);
         }
         return responses;
     }

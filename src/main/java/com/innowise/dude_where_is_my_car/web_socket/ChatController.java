@@ -1,4 +1,4 @@
-package com.innowise.dude_where_is_my_car.web_socket.controllers;
+package com.innowise.dude_where_is_my_car.web_socket;
 
 import com.innowise.dude_where_is_my_car.configs.scurity.JWTGenerator;
 import com.innowise.dude_where_is_my_car.web_socket.dto.InputChatMessage;

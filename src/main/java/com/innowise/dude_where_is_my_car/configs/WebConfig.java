@@ -1,6 +1,5 @@
 package com.innowise.dude_where_is_my_car.configs;
 
-import com.innowise.dude_where_is_my_car.configs.logging.LoggerInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

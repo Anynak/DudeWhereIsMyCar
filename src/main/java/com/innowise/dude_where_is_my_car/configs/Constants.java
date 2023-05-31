@@ -1,9 +1,8 @@
-package com.innowise.dude_where_is_my_car.configs.consts;
+package com.innowise.dude_where_is_my_car.configs;
 
+public class Constants {
 
-public class Const {
-
-    private Const(){
+    private Constants(){
         throw new IllegalStateException("Utility class");
     }
     public static final int MAX_MILEAGE = 2000_000;

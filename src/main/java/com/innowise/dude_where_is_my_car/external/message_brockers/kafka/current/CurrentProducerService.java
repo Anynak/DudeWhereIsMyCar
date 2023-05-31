@@ -1,18 +1,18 @@
-package com.innowise.dude_where_is_my_car.external.message_brockers.kafka.current.service;
+package com.innowise.dude_where_is_my_car.external.message_brockers.kafka.current;
 
-import com.innowise.dude_where_is_my_car.external.message_brockers.dto.SumTask;
+import com.innowise.dude_where_is_my_car.external.message_brockers.SumTaskDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CurrentProducer {
+public class CurrentProducerService {
     @Autowired
     @Qualifier("currentKafkaTemplate")
-    private KafkaTemplate<String, SumTask> kafkaTemplate;
+    private KafkaTemplate<String, SumTaskDto> kafkaTemplate;
 
-    public void sendMessageToTopic(SumTask sumTask) {
+    public void sendMessageToTopic(SumTaskDto sumTask) {
         kafkaTemplate.send("in", sumTask);
     }
 }

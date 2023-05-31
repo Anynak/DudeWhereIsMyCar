@@ -1,6 +1,6 @@
 package com.innowise.dude_where_is_my_car.repository;
 
-import com.innowise.dude_where_is_my_car.configs.consts.Const;
+import com.innowise.dude_where_is_my_car.configs.Constants;
 import com.innowise.dude_where_is_my_car.dto.requests.search_criteria.PageCriteria;
 import com.innowise.dude_where_is_my_car.dto.requests.search_criteria.SearchUserRequest;
 import com.innowise.dude_where_is_my_car.dto.requests.search_criteria.SortingCriteria;
@@ -34,7 +34,7 @@ class UserSearchRepositoryImplTest {
 
     @Test
     void checkMinPageSizeWithDefaultSearchParameters() {
-        int pageSize = Const.MIN_PAGE_SIZE;
+        int pageSize = Constants.MIN_PAGE_SIZE;
         SearchUserRequest searchUserRequest = new SearchUserRequest();
         PageCriteria pageCriteria = new PageCriteria();
         SortingCriteria sortingCriteria = new SortingCriteria();

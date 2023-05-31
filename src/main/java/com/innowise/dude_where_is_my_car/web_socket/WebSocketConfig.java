@@ -1,4 +1,4 @@
-package com.innowise.dude_where_is_my_car.web_socket.configs;
+package com.innowise.dude_where_is_my_car.web_socket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

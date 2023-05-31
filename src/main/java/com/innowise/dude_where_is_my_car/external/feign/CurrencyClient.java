@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(value = "currency", url = "currencies:8080/api/currency")
+@FeignClient(value = "currency", url = "${openfeign.client.currencies.getClient.url}")
+//@FeignClient(value = "currency", url = "openfeign.client.currencies.getClient.url")
 public interface CurrencyClient {
 
     @GetMapping(value = {"/v1"}, produces = "application/json")
