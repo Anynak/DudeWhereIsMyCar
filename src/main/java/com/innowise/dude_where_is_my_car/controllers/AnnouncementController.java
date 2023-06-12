@@ -27,7 +27,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/announcements")
+@RequestMapping("/announcements/v1")
 @Validated
 @SecurityRequirement(name = "bearerAuth")
 public class AnnouncementController {
@@ -37,7 +37,7 @@ public class AnnouncementController {
     private final AnnouncementMapper announcementMapper;
     private final UserService userService;
 
-    @PostMapping("/v1")
+    @PostMapping
     public ResponseEntity<AnnouncementResponse> addAnnouncementController(@RequestBody @Valid AnnouncementRequest announcementRequest, Principal principal) {
         Announcement announcement = announcementMapper.toAnnouncement(announcementRequest);
         User user = userService.findUserBuLogin(principal.getName());
@@ -47,7 +47,7 @@ public class AnnouncementController {
 
     }
 
-    @GetMapping("/v1")
+    @GetMapping
     public List<AnnouncementResponse> findAnnouncement(
             @RequestParam(required = false) @Size(min = 3, max = 3) String currency,
             @Valid SearchAnnouncementRequest searchAnnouncementRequest,
@@ -62,7 +62,7 @@ public class AnnouncementController {
         return responses;
     }
 
-    @DeleteMapping("/v1/{id}")
+    @DeleteMapping("/{id}")
     public AnnouncementResponse deleteAnnouncementController(@PathVariable @Valid Long id) {
         Announcement deletedAnnouncement = announcementService.deleteAnnouncement(id);
         return announcementMapper.toAnnouncementResponse(deletedAnnouncement);

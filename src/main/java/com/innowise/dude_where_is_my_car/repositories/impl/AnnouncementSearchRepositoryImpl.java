@@ -49,7 +49,7 @@ public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepos
         String vehicleAttributeName = "vehicle";
         Predicate mileageRangePredicate = criteriaBuilder.between(root.get(vehicleAttributeName).get("mileage"), searchRequest.getMileageMin(), searchRequest.getMileageMax());
         predicates.add(mileageRangePredicate);
-//
+
         Predicate releaseYearRangePredicate = criteriaBuilder.between(root.get(vehicleAttributeName).get("releaseYear"), searchRequest.getReleaseYearMin(), searchRequest.getReleaseYearMax());
         predicates.add(releaseYearRangePredicate);
 
@@ -57,12 +57,12 @@ public class AnnouncementSearchRepositoryImpl implements AnnouncementSearchRepos
             Predicate colorPredicate = criteriaBuilder.like(root.get(vehicleAttributeName).get("color"), "%" + searchRequest.getColor() + "%");
             predicates.add(colorPredicate);
         }
-//
+
         if (searchRequest.getVehicleBrandName() != null) {
             Predicate brandPredicate = criteriaBuilder.like(root.get(vehicleAttributeName).get("vehicleModel").get("vehicleBrand").get("vehicleBrandName"), "%" + searchRequest.getVehicleBrandName() + "%");
             predicates.add(brandPredicate);
         }
-//
+
         if (searchRequest.getVehicleModelName() != null) {
             Predicate modelPredicate = criteriaBuilder.like(root.get("vehicle").get("vehicleModel").get("vehicleModelName"), "%" + searchRequest.getVehicleModelName() + "%");
             predicates.add(modelPredicate);

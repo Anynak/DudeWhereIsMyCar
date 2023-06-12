@@ -28,7 +28,7 @@ import java.util.List;
 @RestController
 @Validated
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/auth/v1")
 @Slf4j
 public class AuthController {
     private final UserService userService;
@@ -37,7 +37,7 @@ public class AuthController {
     private final JWTGenerator jwtGenerator;
 
 
-    @PostMapping("/v1/register")
+    @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid RegisterUserRequest userRequest, Principal principal) {
         if (principal != null) throw new AlreadyLoggedException("user " + principal.getName() + " is already logged");
         User user = userService.registerUser(userRequest);
@@ -47,7 +47,7 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping("/v1/login")
+    @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> authUser(@RequestBody @Valid LoginDTO loginDTO, HttpSession session) {
         log.info("attempt to login user");
         Authentication authentication = authenticationService.authenticate(loginDTO.getLogin(), loginDTO.getPassword());

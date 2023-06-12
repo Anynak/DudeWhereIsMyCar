@@ -18,31 +18,31 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Validated
-@RequestMapping("/vehicleModels")
+@RequestMapping("/vehicleModels/v1")
 public class VehicleModelController {
 
     private final VehicleModelMapper vehicleModelMapper;
     private final VehicleModelService vehicleModelService;
 
-    @PostMapping("/v1")
+    @PostMapping
     public List<VehicleModelResponse> addVehicleModels(@RequestBody @Valid ValidList<VehicleModelRequest> vehicleModelsRequest) {
         List<VehicleModel> vm = vehicleModelMapper.toVehicleModels(vehicleModelsRequest);
         List<VehicleModel> savedVehicleModels = vehicleModelService.addVehicleModels(vm);
         return vehicleModelMapper.toVehicleModelResponses(savedVehicleModels);
     }
 
-    @DeleteMapping("/v1/{modelId}")
+    @DeleteMapping("/{modelId}")
     @ResponseStatus(HttpStatus.OK)
     public void removeVehicleModel(@PathVariable Long modelId) {
         vehicleModelService.removeVehicleModelById(modelId);
     }
 
-    @GetMapping("/v1/all")
+    @GetMapping("/all")
     public List<VehicleModelResponse> getVehicleModels() {
         return vehicleModelMapper.toVehicleModelResponses(vehicleModelService.getAllVehicleModels());
     }
 
-    @GetMapping("/v1")
+    @GetMapping
     public List<VehicleModelResponse> getVehicleModelsByBrand(@RequestParam(name = "brandId") Long brandId) {
         return vehicleModelMapper.toVehicleModelResponses(vehicleModelService.getVehicleModelsByBrand(brandId));
     }

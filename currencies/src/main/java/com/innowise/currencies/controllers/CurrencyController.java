@@ -14,14 +14,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/currency")
-//@CrossOrigin
+@RequestMapping("/currency/v1")
 public class CurrencyController {
 
     private final CurrencyRateHandler currencyRateHandler;
     private final CurrencyRateService currencyRateService;
 
-    @GetMapping("/v1")
+    @GetMapping
     public CurrencyRateResponse getCurrencyRate(@RequestParam("base") CurrencyName base, @RequestParam("rates") List<CurrencyName> rateRequests) {
         CurrencyRateResponse rawCurrencyRateResponse = currencyRateService.getLast();
         return currencyRateHandler.handleResponse(base, rateRequests, rawCurrencyRateResponse);

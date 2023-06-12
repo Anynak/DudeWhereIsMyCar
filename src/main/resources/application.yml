@@ -34,9 +34,8 @@ spring:
   cloud:
     openfeign:
       client:
-        config:
-          getClient:
-            url:openfeign.client.currencies.getClient.url
+        currency-service:
+          url: currencies/api/currency/v1
 
 schedulerPrint:
   intervalMs: 30000
