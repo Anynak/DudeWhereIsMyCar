@@ -5,13 +5,10 @@ import com.innowise.currencies.model.CurrencyName;
 import com.innowise.currencies.services.CurrencyRateHandler;
 import com.innowise.currencies.services.CurrencyRateService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/currency/v1")

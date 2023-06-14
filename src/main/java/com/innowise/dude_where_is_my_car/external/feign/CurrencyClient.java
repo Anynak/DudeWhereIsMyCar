@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(value = "currency", url = "${cloud.openfeign.client.currency-service.url}")
+@FeignClient(value = "${spring.feign.config.name}", url = "${spring.feign.config.url}")
 public interface CurrencyClient {
 
-    @GetMapping(value = {"/v1"}, produces = "application/json")
+    @GetMapping(value = {"${spring.feign.config.value.get_rate}"}, produces = "application/json")
     CurrencyRateResponse getCurrencyRate(@RequestParam("base") CurrencyName base, @RequestParam("rates") List<CurrencyName> rateRequests);
 
 }

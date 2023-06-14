@@ -2,24 +2,27 @@ app:
   name: 'Dude Where Is MyCar'
   version: '1.01'
 
+
+
 spring:
   datasource:
-    username: postgres
-    url: jdbc:postgresql://car_app_postgres:5432/dudeWhereIsMyCar
-    password: '1111'
+    username: ${DATASOURCE_USERNAME}
+    url: ${DATASOURCE_URL}
+    password: ${DATASOURCE_PASSWORD}
   web:
     locale: en_US
-  security:
-    user:
-      name: user
-      password: '1111'
   jpa:
     properties:
       hibernate:
         format_sql: 'true'
     show-sql: 'true'
 
-
+  feign:
+    config:
+      name: ${FEIGN_CONFIG_NAME}
+      url: ${FEIGN_CONFIG_URL}
+      value:
+        get_rate: ${FEIGN_CONFIG_VALUE_GET_RATE}
 
 
 
@@ -31,11 +34,9 @@ spring:
     consumer:
       bootstrap-servers: broker:29092
 
-  cloud:
-    openfeign:
-      client:
-        currency-service:
-          url: currencies/api/currency/v1
+
+
+
 
 schedulerPrint:
   intervalMs: 30000

@@ -42,6 +42,13 @@ services:
       - kafka
       - car_app_postgres
       - currencies
+    environment:
+      FEIGN_CONFIG_NAME: currency
+      FEIGN_CONFIG_URL: currencies:8080
+      FEIGN_CONFIG_VALUE_GET_RATE: /api/currency/v1
+      DATASOURCE_URL: jdbc:postgresql://car_app_postgres:5432/dudeWhereIsMyCar
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: 1111
 
 
   zookeeper:
