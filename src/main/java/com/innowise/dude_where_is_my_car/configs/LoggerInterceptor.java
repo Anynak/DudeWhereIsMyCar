@@ -9,11 +9,13 @@ import org.slf4j.MDC;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+
 @RequiredArgsConstructor
 @Component
 public class LoggerInterceptor implements HandlerInterceptor {
     private final JWTGenerator jwtGenerator;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
+
     @Override
     public boolean preHandle(
             @NonNull HttpServletRequest request,
@@ -21,7 +23,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
             @NonNull Object handler) {
 
         String token = jwtAuthenticationFilter.getJWTFromRequest(request);
-        if(token!=null){
+        if (token != null) {
             String login = jwtGenerator.getUsernameFromJWT(token);
             MDC.put("UserLogin", login);
         }

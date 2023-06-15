@@ -5,9 +5,6 @@ import com.innowise.dude_where_is_my_car.dto.requests.user_requests.RegisterUser
 import com.innowise.dude_where_is_my_car.models.Role;
 import com.innowise.dude_where_is_my_car.models.User;
 import com.innowise.dude_where_is_my_car.repositories.UserRepository;
-import com.innowise.dude_where_is_my_car.service.impl.BeforeRegisterUserChecker;
-import com.innowise.dude_where_is_my_car.service.impl.RoleServiceImpl;
-import com.innowise.dude_where_is_my_car.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +26,7 @@ class UserServiceImplTest {
     @Mock
     private UserRepository userRepository;
     @Mock
-    private RoleServiceImpl roleService;
+    private RoleService roleService;
     @Mock
     private UserMapper userMapper;
     @Mock
@@ -39,7 +36,7 @@ class UserServiceImplTest {
     @Captor
     private ArgumentCaptor<User> userCaptor;
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Test
     void saveNewUserWitDefaultRoleAsUSER() {

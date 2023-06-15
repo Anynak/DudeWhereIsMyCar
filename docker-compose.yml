@@ -49,6 +49,7 @@ services:
       DATASOURCE_URL: jdbc:postgresql://car_app_postgres:5432/dudeWhereIsMyCar
       DATASOURCE_USERNAME: postgres
       DATASOURCE_PASSWORD: 1111
+      LOGGING_LEVEL: INFO
 
 
   zookeeper:
@@ -177,7 +178,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - 9090:9090
-#
+  #
   grafana:
     container_name: grafana
     image: grafana/grafana

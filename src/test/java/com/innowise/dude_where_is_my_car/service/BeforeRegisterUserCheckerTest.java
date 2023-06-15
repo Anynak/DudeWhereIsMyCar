@@ -5,7 +5,6 @@ import com.innowise.dude_where_is_my_car.exceptions.EmailAlreadyExistsException;
 import com.innowise.dude_where_is_my_car.exceptions.PhoneNumberAlreadyExistsException;
 import com.innowise.dude_where_is_my_car.exceptions.UserAlreadyExistsException;
 import com.innowise.dude_where_is_my_car.repositories.UserRepository;
-import com.innowise.dude_where_is_my_car.service.impl.BeforeRegisterUserChecker;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,9 +27,7 @@ class BeforeRegisterUserCheckerTest {
         Mockito.when(userRepository.existsByLogin(anyString())).thenReturn(true);
         RegisterUserRequest registerUserRequest = new RegisterUserRequest();
         registerUserRequest.setLogin("existingLogin");
-        assertThrows(UserAlreadyExistsException.class, () -> {
-            beforeRegisterUserChecker.check(registerUserRequest);
-        });
+        assertThrows(UserAlreadyExistsException.class, () -> beforeRegisterUserChecker.check(registerUserRequest));
     }
 
     @Test
@@ -38,9 +35,7 @@ class BeforeRegisterUserCheckerTest {
         Mockito.when(userRepository.existsByEmail(anyString())).thenReturn(true);
         RegisterUserRequest registerUserRequest = new RegisterUserRequest();
         registerUserRequest.setEmail("existingEmail");
-        assertThrows(EmailAlreadyExistsException.class, () -> {
-            beforeRegisterUserChecker.check(registerUserRequest);
-        });
+        assertThrows(EmailAlreadyExistsException.class, () -> beforeRegisterUserChecker.check(registerUserRequest));
     }
 
     @Test
@@ -48,8 +43,6 @@ class BeforeRegisterUserCheckerTest {
         Mockito.when(userRepository.existsByPhone(anyString())).thenReturn(true);
         RegisterUserRequest registerUserRequest = new RegisterUserRequest();
         registerUserRequest.setPhone("existingPhone");
-        assertThrows(PhoneNumberAlreadyExistsException.class, () -> {
-            beforeRegisterUserChecker.check(registerUserRequest);
-        });
+        assertThrows(PhoneNumberAlreadyExistsException.class, () -> beforeRegisterUserChecker.check(registerUserRequest));
     }
 }

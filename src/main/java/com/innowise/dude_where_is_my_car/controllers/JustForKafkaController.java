@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sum")
 public class JustForKafkaController {
     private final CurrentProducerService currentProducer;
+
     @PostMapping("/{n1}/{n2}")
     @ResponseStatus(HttpStatus.OK)
     public void registerUser(@PathVariable Long n1, @PathVariable Long n2) {

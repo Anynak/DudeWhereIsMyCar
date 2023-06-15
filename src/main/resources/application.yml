@@ -3,8 +3,8 @@ app:
   version: '1.01'
 
 
-
 spring:
+
   datasource:
     username: ${DATASOURCE_USERNAME}
     url: ${DATASOURCE_URL}
@@ -67,9 +67,10 @@ server:
 
   servlet:
     contextPath: /api
+
 logging:
   level:
     org:
       springframework:
-        web: TRACE
+        web: ${LOGGING_LEVEL}
 

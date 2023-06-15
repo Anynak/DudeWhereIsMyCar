@@ -2,8 +2,10 @@
 
 - to start, clone repository and build using Gradle
 -
+
 run [docker-compose.yml](https://github.com/Anynak/DudeWhereIsMyCar/blob/26fa22b3c3655ad688aaf68a60a78c58a08f4b06/docker-compose.yml)
 to start all necessary containers
+
 - admin login: **admin**, password: **Admin1111**
 
 -------------------------

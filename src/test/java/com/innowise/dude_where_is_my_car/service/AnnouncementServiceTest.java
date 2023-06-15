@@ -2,7 +2,6 @@ package com.innowise.dude_where_is_my_car.service;
 
 import com.innowise.dude_where_is_my_car.models.Announcement;
 import com.innowise.dude_where_is_my_car.repositories.AnnouncementRepository;
-import com.innowise.dude_where_is_my_car.service.impl.AnnouncementServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +20,7 @@ class AnnouncementServiceTest {
     @Mock
     private AnnouncementRepository announcementRepository;
     @InjectMocks
-    private AnnouncementServiceImpl announcementService;
+    private AnnouncementService announcementService;
 
     @Test
     void checkThatAnnouncementRemovalIsSoft() {

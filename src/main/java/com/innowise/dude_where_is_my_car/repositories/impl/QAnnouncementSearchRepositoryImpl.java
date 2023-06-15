@@ -18,6 +18,7 @@ import static com.innowise.dude_where_is_my_car.models.QAnnouncement.announcemen
 @RequiredArgsConstructor
 public class QAnnouncementSearchRepositoryImpl implements QAnnouncementSearchRepository {
     private final EntityManager entityManager;
+
     @Override
     public List<Announcement> searchAnnouncement(Predicate searchRequestPredicate, OrderSpecifier<?> orderSpecifier, PageCriteria pageCriteria) {
         return new JPAQuery<Announcement>(entityManager)

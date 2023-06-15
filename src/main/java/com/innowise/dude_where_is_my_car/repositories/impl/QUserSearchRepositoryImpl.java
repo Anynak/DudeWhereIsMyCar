@@ -18,6 +18,7 @@ import static com.innowise.dude_where_is_my_car.models.QUser.user;
 @RequiredArgsConstructor
 public class QUserSearchRepositoryImpl implements QUserSearchRepository {
     private final EntityManager entityManager;
+
     @Override
     public List<User> searchUser(Predicate searchRequestPredicate, OrderSpecifier<?> orderSpecifier, PageCriteria pageCriteria) {
         return new JPAQuery<User>(entityManager)

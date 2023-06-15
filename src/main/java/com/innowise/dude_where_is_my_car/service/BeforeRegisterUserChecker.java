@@ -1,4 +1,4 @@
-package com.innowise.dude_where_is_my_car.service.impl;
+package com.innowise.dude_where_is_my_car.service;
 
 
 import com.innowise.dude_where_is_my_car.dto.requests.user_requests.RegisterUserRequest;

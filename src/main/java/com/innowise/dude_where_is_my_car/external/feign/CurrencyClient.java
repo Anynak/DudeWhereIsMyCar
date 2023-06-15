@@ -3,7 +3,8 @@ package com.innowise.dude_where_is_my_car.external.feign;
 import com.innowise.dude_where_is_my_car.external.feign.dto.CurrencyName;
 import com.innowise.dude_where_is_my_car.external.feign.dto.CurrencyRateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
